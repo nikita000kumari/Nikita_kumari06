@@ -146,25 +146,11 @@
       width: 38px;
     }
 
-    .bulb-glass {
-      transition: fill 0.3s ease, filter 0.3s ease;
-    }
+    .bulb-glass { transition: fill 0.3s ease, filter 0.3s ease; }
+    body:not(.dark-mode) .bulb-glass { fill: #fcd34d; stroke: #d97706; filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.9)); }
+    body.dark-mode .bulb-glass { fill: #27272a; stroke: #71717a; filter: none; }
 
-    body:not(.dark-mode) .bulb-glass {
-      fill: #fcd34d;
-      stroke: #d97706;
-      filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.9));
-    }
-
-    body.dark-mode .bulb-glass {
-      fill: #27272a;
-      stroke: #71717a;
-      filter: none;
-    }
-
-    .bulb-filament {
-      transition: stroke 0.3s ease;
-    }
+    .bulb-filament { transition: stroke 0.3s ease; }
     body:not(.dark-mode) .bulb-filament { stroke: #b45309; }
     body.dark-mode .bulb-filament { stroke: #52525b; }
 
@@ -173,54 +159,27 @@
       transform-origin: top center;
       cursor: pointer;
     }
+    .pull-chain-toggle:active .pull-string-group { transform: translateY(14px); }
 
-    .pull-chain-toggle:active .pull-string-group {
-      transform: translateY(14px);
-    }
-
-    .string-line {
-      stroke: var(--soft);
-      stroke-dasharray: 2 2;
-    }
-
-    .pull-ring {
-      fill: var(--toggle-bg);
-      stroke: var(--soft);
-      stroke-width: 1.8;
-      transition: stroke 0.2s ease, fill 0.2s ease;
-    }
-
-    .pull-chain-toggle:hover .pull-ring {
-      stroke: var(--accent);
-      fill: var(--tag-bg);
-    }
+    .string-line { stroke: var(--soft); stroke-dasharray: 2 2; }
+    .pull-ring { fill: var(--toggle-bg); stroke: var(--soft); stroke-width: 1.8; transition: all 0.2s ease; }
+    .pull-chain-toggle:hover .pull-ring { stroke: var(--accent); fill: var(--tag-bg); }
 
     .hero { margin-bottom: 2.8rem; }
     .hero h1 { font-size: clamp(2.8rem, 7vw, 4.5rem); letter-spacing: -0.06em; margin-bottom: 0.8rem; text-transform: lowercase; font-weight: 500; }
     .hero-meta { margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; color: var(--muted); }
     
     .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #22c55e;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+      width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
     }
 
     .hero-copy { max-width: 60ch; margin-bottom: 1.2rem; line-height: 1.7; color: var(--muted); }
 
     .socials { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--muted); }
     .social-link, .inline-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: var(--link);
-      text-decoration-line: underline;
-      text-decoration-color: var(--link-underline);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 0.24rem;
-      transition: color 0.2s ease;
+      display: inline-flex; align-items: center; gap: 0.45rem; color: var(--link);
+      text-decoration-line: underline; text-decoration-color: var(--link-underline); text-decoration-thickness: 2px;
+      text-underline-offset: 0.24rem; transition: color 0.2s ease;
     }
     .social-link svg, .inline-link svg { width: 0.95rem; height: 0.95rem; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .social-link:hover, .inline-link:hover { color: var(--accent); text-decoration-color: var(--link-underline-hover); }
@@ -231,30 +190,17 @@
     /* Filter Bar */
     .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
     .filter-btn {
-      background: transparent;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 0.8rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      background: transparent; border: 1px solid var(--line); color: var(--muted);
+      font-family: inherit; font-size: 0.8rem; padding: 0.3rem 0.7rem; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;
     }
     .filter-btn:hover, .filter-btn.active { color: var(--accent); border-color: var(--accent); background: var(--tag-bg); }
 
     /* Project Cards Grid */
     .projects-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
     .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 1.25rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-      box-shadow: var(--card-shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease; box-shadow: var(--card-shadow);
+      display: flex; flex-direction: column; justify-content: space-between;
     }
     .project-card:hover { transform: translateY(-2px); border-color: var(--line-strong); }
     .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
@@ -266,6 +212,88 @@
     .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag { font-size: 0.75rem; background: var(--tag-bg); color: var(--tag-text); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid var(--line); }
+
+    /* 📝 INTERACTIVE WRITING CARDS WITH CLEAR HOVER STATES */
+    .writing-list { display: grid; gap: 1rem; }
+
+    .writing-card {
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none !important;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .writing-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: var(--tag-bg);
+      box-shadow: var(--card-shadow);
+    }
+
+    .writing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .writing-title {
+      color: var(--link);
+      font-size: 1.05rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .writing-card:hover .writing-title {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 0.24rem;
+    }
+
+    .writing-arrow {
+      color: var(--link);
+      transition: transform 0.2s ease, color 0.2s ease;
+      font-size: 1.1rem;
+      display: inline-block;
+    }
+
+    .writing-card:hover .writing-arrow {
+      transform: translate(3px, -3px);
+      color: var(--accent);
+    }
+
+    .writing-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .writing-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--soft);
+    }
+
+    .medium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--tag-bg);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      color: var(--tag-text);
+      font-weight: 500;
+    }
 
     .list { list-style: none; display: grid; gap: 0.9rem; color: var(--muted); }
     .list li { padding-left: 1.25rem; position: relative; max-width: 64ch; line-height: 1.7; }
@@ -299,42 +327,21 @@
       transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .reveal.active { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.08s; }
     .reveal-delay-2 { transition-delay: 0.16s; }
     .reveal-delay-3 { transition-delay: 0.24s; }
 
-    /* 🐾 CHIBI PET COMPANION + IDLE SLEEP ANIMATIONS */
+    /* 🐾 CHIBI PET COMPANION */
     .pet-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      user-select: none;
-      cursor: grab;
-      touch-action: none;
-      -webkit-tap-highlight-color: transparent;
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      user-select: none; cursor: grab; touch-action: none; -webkit-tap-highlight-color: transparent;
       transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-
     .pet-container:active { cursor: grabbing; }
 
-    .pet-avatar-wrapper {
-      width: 72px;
-      height: 72px;
-      position: relative;
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.12));
-    }
-
-    /* Cozy Breathing Idle Animation when Sleeping */
-    .pet-sleeping .pet-avatar-wrapper {
-      animation: cozyBreathing 3s ease-in-out infinite;
-    }
+    .pet-avatar-wrapper { width: 72px; height: 72px; position: relative; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.12)); }
+    .pet-sleeping .pet-avatar-wrapper { animation: cozyBreathing 3s ease-in-out infinite; }
 
     @keyframes cozyBreathing {
       0%, 100% { transform: scale(1); }
@@ -342,53 +349,23 @@
     }
 
     .pupil { transition: transform 0.08s ease-out; }
-
-    .cozy-tail {
-      transform-origin: 20px 60px;
-      animation: gentleTailWag 3s ease-in-out infinite;
-    }
-
+    .cozy-tail { transform-origin: 20px 60px; animation: gentleTailWag 3s ease-in-out infinite; }
     .cozy-ear-left { transform-origin: 25px 25px; }
     .cozy-ear-right { transform-origin: 55px 25px; }
-
     .ear-twitch-anim { animation: earPop 0.35s ease-in-out; }
 
-    @keyframes gentleTailWag {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(18deg); }
-    }
-
-    @keyframes earPop {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(-15deg); }
-    }
+    @keyframes gentleTailWag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(18deg); } }
+    @keyframes earPop { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-15deg); } }
 
     .floating-sparkle {
-      position: absolute;
-      font-size: 18px;
-      pointer-events: none;
-      animation: floatUpFade 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+      position: absolute; font-size: 18px; pointer-events: none; animation: floatUpFade 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     }
-
     .floating-zzz {
-      position: absolute;
-      font-size: 14px;
-      color: var(--soft);
-      font-weight: bold;
-      pointer-events: none;
-      animation: zzzFloat 2.2s ease-out forwards;
+      position: absolute; font-size: 14px; color: var(--soft); font-weight: bold; pointer-events: none; animation: zzzFloat 2.2s ease-out forwards;
     }
 
-    @keyframes floatUpFade {
-      0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
-      100% { opacity: 0; transform: translateY(-45px) scale(1.3) rotate(20deg); }
-    }
-
-    @keyframes zzzFloat {
-      0% { opacity: 0.9; transform: translate(0, 0) scale(0.7); }
-      50% { opacity: 1; transform: translate(10px, -20px) scale(1.1); }
-      100% { opacity: 0; transform: translate(20px, -45px) scale(1.4); }
-    }
+    @keyframes floatUpFade { 0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); } 100% { opacity: 0; transform: translateY(-45px) scale(1.3) rotate(20deg); } }
+    @keyframes zzzFloat { 0% { opacity: 0.9; transform: translate(0, 0) scale(0.7); } 50% { opacity: 1; transform: translate(10px, -20px) scale(1.1); } 100% { opacity: 0; transform: translate(20px, -45px) scale(1.4); } }
 
     @media (max-width: 560px) {
       body { padding: 20px 16px 44px; }
@@ -517,13 +494,44 @@
         </ul>
       </section>
 
-      <!-- WRITING -->
+      <!-- WRITING (UPGRADED INTERACTIVE CARDS) -->
       <section class="section reveal" id="writing">
         <h2 class="section-title">writing</h2>
-        <ul class="list">
-          <li class="reveal reveal-delay-1"><a href="https://medium.com/@Night_owllll11/whats-is-wsn-wireless-sensor-network-8a0f5408c8e6" target="_blank" rel="noreferrer">what is wsn (wireless sensor network) ↗</a> - a short breakdown of wireless sensor networks and their applications.</li>
-          <li class="reveal reveal-delay-2"><a href="https://medium.com/@Night_owllll11/how-cpus-interact-with-so-many-different-devices-393e7dc8e1ec" target="_blank" rel="noreferrer">how cpus interact with so many different devices ↗</a> - explainer on hardware peripheral communication and system interrupts.</li>
-        </ul>
+        <div class="writing-list">
+          
+          <a class="writing-card reveal reveal-delay-1" href="https://medium.com/@Night_owllll11/whats-is-wsn-wireless-sensor-network-8a0f5408c8e6" target="_blank" rel="noreferrer" title="Read article on Medium">
+            <div class="writing-header">
+              <h3 class="writing-title">
+                what is wsn (wireless sensor network)
+              </h3>
+              <span class="writing-arrow">↗</span>
+            </div>
+            <p class="writing-desc">
+              a short technical breakdown explaining the fundamentals of wireless sensor networks and why energy-aware routing matters.
+            </p>
+            <div class="writing-meta">
+              <span class="medium-badge">Medium</span>
+              <span>• 3 min read</span>
+            </div>
+          </a>
+
+          <a class="writing-card reveal reveal-delay-2" href="https://medium.com/@Night_owllll11/how-cpus-interact-with-so-many-different-devices-393e7dc8e1ec" target="_blank" rel="noreferrer" title="Read article on Medium">
+            <div class="writing-header">
+              <h3 class="writing-title">
+                how cpus interact with so many different devices
+              </h3>
+              <span class="writing-arrow">↗</span>
+            </div>
+            <p class="writing-desc">
+              an intuitive explainer on hardware peripheral communication, memory mapping, and system interrupts.
+            </p>
+            <div class="writing-meta">
+              <span class="medium-badge">Medium</span>
+              <span>• 4 min read</span>
+            </div>
+          </a>
+
+        </div>
       </section>
 
       <!-- CONTACT -->
@@ -578,7 +586,7 @@
             <path d="M 44 34 Q 48 30 52 34" stroke="#f5d4da" stroke-width="2.2" fill="none" stroke-linecap="round"/>
           </g>
 
-          <!-- Eyes Sleeping (Idle State) -->
+          <!-- Eyes Sleeping -->
           <g id="eyesSleeping" style="display: none;">
             <path d="M 28 35 Q 32 39 36 35" stroke="#f5d4da" stroke-width="2" fill="none" stroke-linecap="round"/>
             <path d="M 44 35 Q 48 39 52 35" stroke="#f5d4da" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -806,7 +814,7 @@
       }
       sleepTimer = setTimeout(() => {
         goToSleep();
-      }, 5500); // 5.5 seconds of no interaction puts pet to sleep
+      }, 5500);
     }
 
     function goToSleep() {
@@ -817,7 +825,6 @@
       petContainer.classList.add("pet-sleeping");
       soundSleepLullaby();
 
-      // Periodically float ZZZ bubbles while sleeping
       zzzInterval = setInterval(() => {
         if (!isPetSleeping) return;
         const zzz = document.createElement("span");
@@ -839,7 +846,6 @@
       petContainer.classList.remove("pet-sleeping");
     }
 
-    // Cursor tracking resets sleep timer
     window.addEventListener("pointermove", (e) => {
       if (!petContainer) return;
 
@@ -850,7 +856,6 @@
       const deltaX = e.clientX - petCenterX;
       const deltaY = e.clientY - petCenterY;
 
-      // Eye pupil tracking
       const angle = Math.atan2(deltaY, deltaX);
       const distance = Math.min(Math.hypot(deltaX, deltaY) / 100, 2.2);
 
@@ -862,7 +867,6 @@
       sparkleL.style.transform = `translate(${moveX}px, ${moveY}px)`;
       sparkleR.style.transform = `translate(${moveX}px, ${moveY}px)`;
 
-      // If user moves mouse close to pet, wake it up or reset sleep timer
       if (Math.hypot(deltaX, deltaY) < 180) {
         resetSleepTimer();
       }
@@ -925,7 +929,6 @@
       resetSleepTimer();
     });
 
-    // Start initial sleep timer
     resetSleepTimer();
     renderProjects();
   </script>
