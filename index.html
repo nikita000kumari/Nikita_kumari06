@@ -130,7 +130,7 @@
       transform: translateY(-1px);
     }
 
-    /* 💡 VINTAGE PULL-CHAIN LIGHT BULB THEME SWITCHER */
+    /* 💡 REALISTIC PULL-STRING LIGHT BULB FIX */
     .pull-chain-toggle {
       background: transparent;
       border: none;
@@ -142,17 +142,8 @@
       user-select: none;
       outline: none;
       -webkit-tap-highlight-color: transparent;
-    }
-
-    .bulb-wrapper {
-      width: 36px;
-      height: 54px;
-      position: relative;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .pull-chain-toggle:active .bulb-wrapper {
-      transform: translateY(12px);
+      height: 65px;
+      width: 38px;
     }
 
     .bulb-glass {
@@ -177,14 +168,32 @@
     body:not(.dark-mode) .bulb-filament { stroke: #b45309; }
     body.dark-mode .bulb-filament { stroke: #52525b; }
 
-    .chain-cord {
-      stroke-dasharray: 2 2;
-      animation: cordSway 3s ease-in-out infinite;
+    /* The Pull String & Ring Handle */
+    .pull-string-group {
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: top center;
+      cursor: pointer;
     }
 
-    @keyframes cordSway {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(2deg); }
+    .pull-chain-toggle:active .pull-string-group {
+      transform: translateY(14px);
+    }
+
+    .string-line {
+      stroke: var(--soft);
+      stroke-dasharray: 2 2;
+    }
+
+    .pull-ring {
+      fill: var(--toggle-bg);
+      stroke: var(--soft);
+      stroke-width: 1.8;
+      transition: stroke 0.2s ease, fill 0.2s ease;
+    }
+
+    .pull-chain-toggle:hover .pull-ring {
+      stroke: var(--accent);
+      fill: var(--tag-bg);
     }
 
     .hero { margin-bottom: 2.8rem; }
@@ -302,10 +311,9 @@
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Interactive Body Parts */
     .interactive-part {
       cursor: pointer;
-      transition: filter 0.15s ease, transform 0.2s ease;
+      transition: filter 0.15s ease;
     }
     .interactive-part:hover {
       filter: brightness(1.2);
@@ -389,19 +397,25 @@
           resume
         </a>
 
-        <!-- 💡 VINTAGE PULL-CHAIN LIGHT BULB THEME SWITCHER -->
-        <button class="pull-chain-toggle" id="themeToggle" type="button" aria-label="Toggle light bulb theme">
-          <div class="bulb-wrapper" id="bulbWrapper">
-            <svg viewBox="0 0 40 60" width="100%" height="100%">
-              <line class="chain-cord" x1="20" y1="0" x2="20" y2="15" stroke="var(--soft)" stroke-width="2"/>
-              <rect x="14" y="15" width="12" height="6" rx="1" fill="var(--soft)"/>
-              <rect x="15" y="21" width="10" height="3" fill="var(--line-strong)"/>
-              <path class="bulb-glass" d="M 20 24 C 11 24, 8 33, 11 41 C 13 46, 16 49, 16 52 L 24 52 C 24 49, 27 46, 29 41 C 32 33, 29 24, 20 24 Z" stroke-width="1.8"/>
-              <path class="bulb-filament" d="M 17 48 L 18 36 L 20 39 L 22 36 L 23 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="20" y1="52" x2="20" y2="58" stroke="var(--soft)" stroke-width="1.5"/>
-              <circle cx="20" cy="58" r="1.5" fill="var(--soft)"/>
-            </svg>
-          </div>
+        <!-- 💡 PULL-CHAIN LIGHT BULB FIX (Fixed Bulb + Pull String Handle) -->
+        <button class="pull-chain-toggle" id="themeToggle" type="button" title="Pull string to toggle light/dark theme">
+          <svg viewBox="0 0 40 70" width="38" height="65">
+            <!-- Fixed Top Ceiling Cord -->
+            <line x1="20" y1="0" x2="20" y2="10" stroke="var(--soft)" stroke-width="2"/>
+            <!-- Fixed Bulb Cap -->
+            <rect x="14" y="10" width="12" height="5" rx="1" fill="var(--soft)"/>
+            <!-- Fixed Light Bulb -->
+            <path class="bulb-glass" d="M 20 15 C 12 15, 9 23, 12 30 C 14 34, 16 37, 16 40 L 24 40 C 24 37, 26 34, 28 30 C 31 23, 28 15, 20 15 Z" stroke-width="1.8"/>
+            <path class="bulb-filament" d="M 17 37 L 18 26 L 20 29 L 22 26 L 23 37" fill="none" stroke-width="1.4" stroke-linecap="round"/>
+            
+            <!-- STRETCHABLE PULL STRING & RING HANDLE -->
+            <g class="pull-string-group" id="pullStringGroup">
+              <!-- String dangling from bottom of bulb -->
+              <line class="string-line" x1="20" y1="40" x2="20" y2="56"/>
+              <!-- Pull Ring Handle at the bottom -->
+              <circle class="pull-ring" cx="20" cy="61" r="4"/>
+            </g>
+          </svg>
         </button>
       </div>
     </header>
@@ -521,24 +535,19 @@
   <div class="pet-container" id="petContainer">
     <div class="pet-avatar" id="petAvatar">
       <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Tail -->
         <path id="catTail" class="cat-tail interactive-part" d="M 25 75 Q 10 70 15 50 Q 18 40 25 45" stroke="#e1a8b1" stroke-width="7" fill="none" stroke-linecap="round" title="Touch tail!"/>
         
-        <!-- Cat Body / Belly -->
         <g id="catBody" class="interactive-part" title="Rub belly!">
           <ellipse cx="50" cy="65" rx="28" ry="22" fill="#53514c"/>
           <ellipse cx="50" cy="65" rx="22" ry="17" fill="#7b8798"/>
         </g>
         
-        <!-- Paws -->
         <ellipse id="catPawLeft" class="cat-paw interactive-part" cx="38" cy="83" rx="6" ry="4" fill="#f1f0ec" title="High five paw!"/>
         <ellipse id="catPawRight" class="cat-paw interactive-part" cx="62" cy="83" rx="6" ry="4" fill="#f1f0ec" title="High five paw!"/>
 
-        <!-- Head / Forehead -->
         <g id="catHead" class="interactive-part" title="Pet head!">
           <circle cx="50" cy="42" r="20" fill="#53514c"/>
 
-          <!-- Left & Right Ears -->
           <g id="catEars" class="interactive-part" title="Twitch ears!">
             <polygon class="cat-ear" points="33,30 25,12 42,25" fill="#53514c"/>
             <polygon class="cat-ear" points="33,30 27,16 40,26" fill="#e1a8b1"/>
@@ -546,7 +555,6 @@
             <polygon class="cat-ear" points="67,30 73,16 60,26" fill="#e1a8b1"/>
           </g>
 
-          <!-- Eyes -->
           <g class="cat-eyes" id="catEyes">
             <ellipse cx="42" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
             <ellipse cx="58" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
@@ -554,7 +562,6 @@
             <circle cx="59" cy="39" r="1.5" fill="#111111"/>
           </g>
           
-          <!-- Closed happy eyes when head is petted -->
           <g id="catHappyEyes" style="display: none;">
             <path d="M 38 41 Q 42 37 46 41" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
             <path d="M 54 41 Q 58 37 62 41" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -677,7 +684,7 @@
       }
     }
 
-    // 💡 Pull-Chain Light Bulb Click Sound
+    // Mechanical Light Switch Click Sound
     function playSwitchClickSound(isDark) {
       initAudio();
       if (!audioCtx) return;
@@ -695,8 +702,7 @@
       } catch (e) {}
     }
 
-    // 🐾 SPECIFIC BODY-PART SOUND SYNTHESIZERS
-    // 1. Ears Touch sound (High fast chirp)
+    // 🐾 BODY-PART SOUND SYNTHESIZERS
     function soundEarChirp() {
       initAudio();
       if (!audioCtx) return;
@@ -714,7 +720,6 @@
       osc.start(now); osc.stop(now + 0.16);
     }
 
-    // 2. Head Pet sound (Deep affectionate purr rumble)
     function soundHeadPurr() {
       initAudio();
       if (!audioCtx) return;
@@ -731,7 +736,6 @@
       }
     }
 
-    // 3. Belly Rub sound (Playful bouncy meow)
     function soundBellyBounce() {
       initAudio();
       if (!audioCtx) return;
@@ -749,7 +753,6 @@
       osc.start(now); osc.stop(now + 0.26);
     }
 
-    // 4. Paw High-Five sound (Cute squeak)
     function soundPawSqueak() {
       initAudio();
       if (!audioCtx) return;
@@ -766,7 +769,6 @@
       osc.start(now); osc.stop(now + 0.12);
     }
 
-    // 5. Tail Touch sound (Surprise chirp)
     function soundTailChirp() {
       initAudio();
       if (!audioCtx) return;
@@ -783,14 +785,13 @@
       osc.start(now); osc.stop(now + 0.14);
     }
 
-    // 💡 Pull-Chain Light Bulb Handler
+    // 💡 Pull String Theme Toggle
     themeToggle.addEventListener("click", () => {
       const isDark = document.body.classList.toggle("dark-mode");
       playSwitchClickSound(isDark);
       localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
     });
 
-    // Helper to spawn floating heart
     function spawnHeart() {
       const container = document.getElementById("petContainer");
       const heart = document.createElement("span");
@@ -802,70 +803,51 @@
       setTimeout(() => heart.remove(), 900);
     }
 
-    // 🐾 BIND SPECIFIC BODY-PART TOUCH HANDLERS
+    // BIND BODY-PART TOUCH HANDLERS
     const catHead = document.getElementById("catHead");
     const catEars = document.getElementById("catEars");
     const catBody = document.getElementById("catBody");
     const catPawLeft = document.getElementById("catPawLeft");
     const catPawRight = document.getElementById("catPawRight");
     const catTail = document.getElementById("catTail");
-
     const catEyes = document.getElementById("catEyes");
     const catHappyEyes = document.getElementById("catHappyEyes");
 
-    // 1. Touch Head (Purr + happy closed eyes)
     catHead.addEventListener("pointerdown", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      soundHeadPurr();
-      spawnHeart();
+      e.stopPropagation(); e.preventDefault();
+      soundHeadPurr(); spawnHeart();
       catEyes.style.display = "none";
       catHappyEyes.style.display = "block";
-      setTimeout(() => {
-        catEyes.style.display = "block";
-        catHappyEyes.style.display = "none";
-      }, 700);
+      setTimeout(() => { catEyes.style.display = "block"; catHappyEyes.style.display = "none"; }, 700);
     });
 
-    // 2. Touch Ears (High chirp + ear twitch)
     catEars.addEventListener("pointerdown", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      soundEarChirp();
-      spawnHeart();
+      e.stopPropagation(); e.preventDefault();
+      soundEarChirp(); spawnHeart();
       const ears = document.querySelectorAll(".cat-ear");
       ears.forEach(ear => ear.classList.add("twitching"));
       setTimeout(() => ears.forEach(ear => ear.classList.remove("twitching")), 600);
     });
 
-    // 3. Touch Body / Belly (Bounce + bouncy meow)
     catBody.addEventListener("pointerdown", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      soundBellyBounce();
-      spawnHeart();
+      e.stopPropagation(); e.preventDefault();
+      soundBellyBounce(); spawnHeart();
       document.getElementById("petAvatar").style.transform = "scale(1.2) translateY(-4px)";
       setTimeout(() => document.getElementById("petAvatar").style.transform = "scale(1)", 250);
     });
 
-    // 4. Touch Paws (High-five tap + squeak)
     [catPawLeft, catPawRight].forEach(paw => {
       paw.addEventListener("pointerdown", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        soundPawSqueak();
-        spawnHeart();
+        e.stopPropagation(); e.preventDefault();
+        soundPawSqueak(); spawnHeart();
         paw.classList.add("tapping");
         setTimeout(() => paw.classList.remove("tapping"), 200);
       });
     });
 
-    // 5. Touch Tail (Fast tail wag + surprise chirp)
     catTail.addEventListener("pointerdown", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      soundTailChirp();
-      spawnHeart();
+      e.stopPropagation(); e.preventDefault();
+      soundTailChirp(); spawnHeart();
       catTail.classList.add("wagging-fast");
       setTimeout(() => catTail.classList.remove("wagging-fast"), 800);
     });
