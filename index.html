@@ -110,7 +110,7 @@
       text-underline-offset: 0.22rem;
     }
 
-    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .header-actions { display: flex; align-items: center; gap: 0.85rem; }
 
     .btn-resume {
       display: inline-flex;
@@ -124,31 +124,69 @@
       background: var(--toggle-bg);
       transition: all 0.2s ease;
     }
-
     .btn-resume:hover {
       color: var(--accent);
       border-color: var(--line-strong);
       transform: translateY(-1px);
     }
 
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--line);
-      background: var(--toggle-bg);
-      color: var(--muted);
-      width: 2.4rem;
-      height: 2.4rem;
-      border-radius: 999px;
+    /* 💡 VINTAGE PULL-CHAIN LIGHT BULB THEME SWITCHER */
+    .pull-chain-toggle {
+      background: transparent;
+      border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .theme-toggle:hover { color: var(--accent); border-color: var(--line-strong); transform: translateY(-1px); }
-    .theme-toggle svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .theme-toggle .icon-sun, body.dark-mode .theme-toggle .icon-moon { display: none; }
-    body.dark-mode .theme-toggle .icon-sun { display: block; }
-    .theme-toggle .icon-moon { display: block; }
+
+    .bulb-wrapper {
+      width: 36px;
+      height: 54px;
+      position: relative;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pull-chain-toggle:active .bulb-wrapper {
+      transform: translateY(12px);
+    }
+
+    /* Light bulb glow effect */
+    .bulb-glass {
+      transition: fill 0.3s ease, filter 0.3s ease;
+    }
+
+    body:not(.dark-mode) .bulb-glass {
+      fill: #fcd34d;
+      stroke: #d97706;
+      filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.9));
+    }
+
+    body.dark-mode .bulb-glass {
+      fill: #27272a;
+      stroke: #71717a;
+      filter: none;
+    }
+
+    .bulb-filament {
+      transition: stroke 0.3s ease;
+    }
+    body:not(.dark-mode) .bulb-filament { stroke: #b45309; }
+    body.dark-mode .bulb-filament { stroke: #52525b; }
+
+    .chain-cord {
+      stroke-dasharray: 2 2;
+      animation: cordSway 3s ease-in-out infinite;
+    }
+
+    @keyframes cordSway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
+    }
 
     .hero { margin-bottom: 2.8rem; }
     .hero h1 { font-size: clamp(2.8rem, 7vw, 4.5rem); letter-spacing: -0.06em; margin-bottom: 0.8rem; text-transform: lowercase; font-weight: 500; }
@@ -247,7 +285,7 @@
 
     .footer { padding-top: 1.5rem; border-top: 1px solid var(--line); text-transform: lowercase; color: var(--soft); font-size: 0.85rem; display: flex; justify-content: space-between; }
 
-    /* 🐾 CLEAN & MINIMALIST PET COMPANION STYLES (No text popups!) */
+    /* 🐾 CLEAN PET COMPANION STYLES */
     .pet-container {
       position: fixed;
       bottom: 24px;
@@ -328,9 +366,24 @@
           resume
         </a>
 
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode">
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+        <!-- 💡 PULL-CHAIN LIGHT BULB THEME SWITCHER -->
+        <button class="pull-chain-toggle" id="themeToggle" type="button" aria-label="Toggle light bulb theme">
+          <div class="bulb-wrapper" id="bulbWrapper">
+            <svg viewBox="0 0 40 60" width="100%" height="100%">
+              <!-- Ceiling Mount Wire -->
+              <line class="chain-cord" x1="20" y1="0" x2="20" y2="15" stroke="var(--soft)" stroke-width="2"/>
+              <!-- Bulb Socket / Cap -->
+              <rect x="14" y="15" width="12" height="6" rx="1" fill="var(--soft)"/>
+              <rect x="15" y="21" width="10" height="3" fill="var(--line-strong)"/>
+              <!-- Bulb Glass -->
+              <path class="bulb-glass" d="M 20 24 C 11 24, 8 33, 11 41 C 13 46, 16 49, 16 52 L 24 52 C 24 49, 27 46, 29 41 C 32 33, 29 24, 20 24 Z" stroke-width="1.8"/>
+              <!-- Bulb Filament -->
+              <path class="bulb-filament" d="M 17 48 L 18 36 L 20 39 L 22 36 L 23 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Pull Wire / String hanging from bottom -->
+              <line x1="20" y1="52" x2="20" y2="58" stroke="var(--soft)" stroke-width="1.5"/>
+              <circle cx="20" cy="58" r="1.5" fill="var(--soft)"/>
+            </svg>
+          </div>
         </button>
       </div>
     </header>
@@ -446,7 +499,7 @@
     </footer>
   </div>
 
-  <!-- 🐾 CLEAN PET COMPANION (NO POPUP TEXT!) -->
+  <!-- 🐾 PET COMPANION AVATAR -->
   <div class="pet-container" id="petContainer">
     <div class="pet-avatar" id="petAvatar" title="Touch me!">
       <svg viewBox="0 0 100 100" width="100%" height="100%">
@@ -551,14 +604,9 @@
     const themeToggle = document.getElementById("themeToggle");
     const savedTheme = localStorage.getItem("nikita-theme");
 
-    function syncThemeToggle(isDark) {
-      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-    }
-
     if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.body.classList.add("dark-mode");
     }
-    syncThemeToggle(document.body.classList.contains("dark-mode"));
 
     function updateTime() {
       const options = { hour: "2-digit", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" };
@@ -566,12 +614,6 @@
     }
     updateTime();
     setInterval(updateTime, 60000);
-
-    themeToggle.addEventListener("click", () => {
-      const isDark = document.body.classList.toggle("dark-mode");
-      syncThemeToggle(isDark);
-      localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
-    });
 
     function copyEmail() {
       navigator.clipboard.writeText("nikitakumari0709@gmail.com");
@@ -581,10 +623,9 @@
     }
 
     // ====================================================
-    // 🔊 AUDIO CONTEXT & CUTE MEOW SOUND SYNTHESIZER
+    // 🔊 AUDIO SYNTHESIZER (WEB AUDIO API)
     // ====================================================
     let audioCtx = null;
-
     function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -594,45 +635,118 @@
       }
     }
 
-    // Play a realistic soft synthesized meow
-    function playCatMeow() {
+    // Mechanical Light Bulb String Pull-Switch Click Sound
+    function playSwitchClickSound(isDark) {
       initAudio();
       if (!audioCtx) return;
-
       try {
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
 
-        osc.type = 'sine';
-        
-        // Meow pitch contour: rise up quickly, then slide down
-        osc.frequency.setValueAtTime(450, now);
-        osc.frequency.exponentialRampToValueAtTime(750, now + 0.1);
-        osc.frequency.exponentialRampToValueAtTime(350, now + 0.28);
+        osc.type = isDark ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(isDark ? 280 : 550, now);
+        osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
 
-        gain.gain.setValueAtTime(0.01, now);
-        gain.gain.linearRampToValueAtTime(0.18, now + 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.28);
+        osc.stop(now + 0.04);
       } catch (e) {}
     }
 
-    // Interactive Pet Touch Handler
+    // VARIETY OF 4 SUPER CUTE PET VOICE SYNTHESIZERS
+    function playPetVoice() {
+      initAudio();
+      if (!audioCtx) return;
+
+      const voices = [
+        // 1. High playful chirp
+        () => {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(650, now);
+          osc.frequency.exponentialRampToValueAtTime(950, now + 0.09);
+          osc.frequency.exponentialRampToValueAtTime(550, now + 0.22);
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.18, now + 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.22);
+        },
+        // 2. Sweet double trill meow
+        () => {
+          const now = audioCtx.currentTime;
+          [580, 780].forEach((freq, i) => {
+            const osc = ctx = audioCtx;
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = 'sine';
+            o.frequency.setValueAtTime(freq, now + i * 0.07);
+            o.frequency.exponentialRampToValueAtTime(freq + 140, now + i * 0.07 + 0.06);
+            g.gain.setValueAtTime(0.14, now + i * 0.07);
+            g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.07);
+            o.connect(g); g.connect(ctx.destination);
+            o.start(now + i * 0.07); o.stop(now + i * 0.07 + 0.07);
+          });
+        },
+        // 3. Tiny kitten mew
+        () => {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(750, now);
+          osc.frequency.exponentialRampToValueAtTime(1100, now + 0.1);
+          osc.frequency.exponentialRampToValueAtTime(600, now + 0.25);
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.15, now + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.25);
+        },
+        // 4. Soft purr chirp
+        () => {
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(480, now);
+          osc.frequency.exponentialRampToValueAtTime(620, now + 0.15);
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.16, now + 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.2);
+        }
+      ];
+
+      const randomVoice = voices[Math.floor(Math.random() * voices.length)];
+      randomVoice();
+    }
+
+    // 💡 Pull-Chain Light Bulb Theme Switcher Handler
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark-mode");
+      playSwitchClickSound(isDark);
+      localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
+    });
+
+    // 🐾 Touch Pet Handler
     const petAvatar = document.getElementById("petAvatar");
     
     function triggerPetTouch(e) {
       if (e) e.preventDefault();
       
-      // Play audio meow instantly
-      playCatMeow();
+      playPetVoice();
 
-      // Trigger bounce animation & floating heart
+      // Bounce & floating hearts
       petAvatar.style.transform = "scale(1.2)";
       setTimeout(() => petAvatar.style.transform = "scale(1)", 200);
 
@@ -646,7 +760,6 @@
       setTimeout(() => heart.remove(), 900);
     }
 
-    // Support both Touch & Pointer/Click events for instant response on mobile & desktop
     petAvatar.addEventListener("pointerdown", triggerPetTouch);
 
     renderProjects();
