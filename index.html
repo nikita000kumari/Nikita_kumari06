@@ -46,6 +46,7 @@
       --tag-bg: rgba(23, 23, 23, 0.05);
       --tag-text: #444;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      --modal-bg: rgba(255, 255, 255, 0.95);
     }
 
     body.dark-mode {
@@ -69,6 +70,7 @@
       --tag-bg: rgba(255, 255, 255, 0.08);
       --tag-text: #dcd8cf;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      --modal-bg: rgba(18, 18, 22, 0.95);
     }
 
     html { scroll-behavior: smooth; }
@@ -110,7 +112,38 @@
       text-underline-offset: 0.22rem;
     }
 
-    .header-actions { display: flex; align-items: center; gap: 0.85rem; }
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+    /* ⌨️ COMMAND PALETTE BUTTON IN HEADER */
+    .cmd-k-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--toggle-bg);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .cmd-k-btn:hover {
+      color: var(--accent);
+      border-color: var(--line-strong);
+      transform: translateY(-1px);
+    }
+
+    .cmd-k-btn kbd {
+      background: var(--tag-bg);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-size: 0.7rem;
+      color: var(--soft);
+    }
 
     .btn-resume {
       display: inline-flex;
@@ -213,87 +246,22 @@
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag { font-size: 0.75rem; background: var(--tag-bg); color: var(--tag-text); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid var(--line); }
 
-    /* 📝 INTERACTIVE WRITING CARDS WITH CLEAR HOVER STATES */
+    /* 📝 INTERACTIVE WRITING CARDS */
     .writing-list { display: grid; gap: 1rem; }
-
     .writing-card {
-      display: block;
-      background: var(--bg-card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 1.1rem 1.25rem;
-      text-decoration: none !important;
+      display: block; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px;
+      padding: 1.1rem 1.25rem; text-decoration: none !important;
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .writing-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      background: var(--tag-bg);
-      box-shadow: var(--card-shadow);
-    }
-
-    .writing-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.4rem;
-    }
-
-    .writing-title {
-      color: var(--link);
-      font-size: 1.05rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s ease;
-    }
-
-    .writing-card:hover .writing-title {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 0.24rem;
-    }
-
-    .writing-arrow {
-      color: var(--link);
-      transition: transform 0.2s ease, color 0.2s ease;
-      font-size: 1.1rem;
-      display: inline-block;
-    }
-
-    .writing-card:hover .writing-arrow {
-      transform: translate(3px, -3px);
-      color: var(--accent);
-    }
-
-    .writing-desc {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-    }
-
-    .writing-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.78rem;
-      color: var(--soft);
-    }
-
-    .medium-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: var(--tag-bg);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      border: 1px solid var(--line);
-      color: var(--tag-text);
-      font-weight: 500;
-    }
+    .writing-card:hover { transform: translateY(-2px); border-color: var(--line-strong); background: var(--tag-bg); box-shadow: var(--card-shadow); }
+    .writing-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .writing-title { color: var(--link); font-size: 1.05rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s ease; }
+    .writing-card:hover .writing-title { color: var(--accent); text-decoration: underline; text-underline-offset: 0.24rem; }
+    .writing-arrow { color: var(--link); transition: transform 0.2s ease, color 0.2s ease; font-size: 1.1rem; display: inline-block; }
+    .writing-card:hover .writing-arrow { transform: translate(3px, -3px); color: var(--accent); }
+    .writing-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+    .writing-meta { display: flex; align-items: center; gap: 0.75rem; font-size: 0.78rem; color: var(--soft); }
+    .medium-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--tag-bg); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--line); color: var(--tag-text); font-weight: 500; }
 
     .list { list-style: none; display: grid; gap: 0.9rem; color: var(--muted); }
     .list li { padding-left: 1.25rem; position: relative; max-width: 64ch; line-height: 1.7; }
@@ -322,8 +290,7 @@
 
     /* 📜 SMOOTH SCROLL REVEAL ANIMATIONS */
     .reveal {
-      opacity: 0;
-      transform: translateY(22px);
+      opacity: 0; transform: translateY(22px);
       transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
@@ -331,6 +298,73 @@
     .reveal-delay-1 { transition-delay: 0.08s; }
     .reveal-delay-2 { transition-delay: 0.16s; }
     .reveal-delay-3 { transition-delay: 0.24s; }
+
+    /* ⌨️ COMMAND PALETTE MODAL STYLES */
+    .cmd-modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+      z-index: 2000; opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease;
+      display: flex; justify-content: center; align-items: flex-start;
+      padding-top: 12vh;
+    }
+
+    .cmd-modal-overlay.open {
+      opacity: 1; pointer-events: auto;
+    }
+
+    .cmd-modal {
+      width: min(580px, 92vw);
+      background: var(--modal-bg);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      overflow: hidden;
+      transform: translateY(-10px) scale(0.98);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cmd-modal-overlay.open .cmd-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .cmd-search-wrapper {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--line);
+    }
+
+    .cmd-search-wrapper svg { width: 1.1rem; height: 1.1rem; stroke: var(--soft); fill: none; }
+
+    .cmd-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      font-family: inherit; font-size: 0.95rem; color: var(--text);
+    }
+
+    .cmd-list {
+      max-height: 320px; overflow-y: auto; padding: 0.5rem; list-style: none;
+    }
+
+    .cmd-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 0.85rem; border-radius: 6px; cursor: pointer;
+      color: var(--muted); font-size: 0.88rem; transition: all 0.15s ease;
+    }
+
+    .cmd-item:hover, .cmd-item.selected {
+      background: var(--tag-bg); color: var(--accent);
+    }
+
+    .cmd-item-left { display: flex; align-items: center; gap: 0.65rem; }
+
+    .cmd-badge {
+      font-size: 0.72rem; color: var(--soft); background: var(--bg);
+      padding: 0.15rem 0.4rem; border-radius: 4px; border: 1px solid var(--line);
+    }
+
+    .cmd-footer {
+      padding: 0.5rem 1.1rem; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--soft);
+    }
 
     /* 🐾 CHIBI PET COMPANION */
     .pet-container {
@@ -343,11 +377,7 @@
     .pet-avatar-wrapper { width: 72px; height: 72px; position: relative; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.12)); }
     .pet-sleeping .pet-avatar-wrapper { animation: cozyBreathing 3s ease-in-out infinite; }
 
-    @keyframes cozyBreathing {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04) translateY(1px); }
-    }
-
+    @keyframes cozyBreathing { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04) translateY(1px); } }
     .pupil { transition: transform 0.08s ease-out; }
     .cozy-tail { transform-origin: 20px 60px; animation: gentleTailWag 3s ease-in-out infinite; }
     .cozy-ear-left { transform-origin: 25px 25px; }
@@ -357,12 +387,8 @@
     @keyframes gentleTailWag { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(18deg); } }
     @keyframes earPop { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-15deg); } }
 
-    .floating-sparkle {
-      position: absolute; font-size: 18px; pointer-events: none; animation: floatUpFade 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-    }
-    .floating-zzz {
-      position: absolute; font-size: 14px; color: var(--soft); font-weight: bold; pointer-events: none; animation: zzzFloat 2.2s ease-out forwards;
-    }
+    .floating-sparkle { position: absolute; font-size: 18px; pointer-events: none; animation: floatUpFade 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+    .floating-zzz { position: absolute; font-size: 14px; color: var(--soft); font-weight: bold; pointer-events: none; animation: zzzFloat 2.2s ease-out forwards; }
 
     @keyframes floatUpFade { 0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); } 100% { opacity: 0; transform: translateY(-45px) scale(1.3) rotate(20deg); } }
     @keyframes zzzFloat { 0% { opacity: 0.9; transform: translate(0, 0) scale(0.7); } 50% { opacity: 1; transform: translate(10px, -20px) scale(1.1); } 100% { opacity: 0; transform: translate(20px, -45px) scale(1.4); } }
@@ -390,6 +416,11 @@
       </nav>
 
       <div class="header-actions">
+        <!-- ⌨️ COMMAND PALETTE TRIGGER BUTTON -->
+        <button class="cmd-k-btn" id="openCmdBtn" type="button" title="Open Command Palette (Ctrl+K)">
+          <span>search</span> <kbd>⌘K</kbd>
+        </button>
+
         <a href="https://drive.google.com/" target="_blank" class="btn-resume" rel="noreferrer">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           resume
@@ -494,21 +525,17 @@
         </ul>
       </section>
 
-      <!-- WRITING (UPGRADED INTERACTIVE CARDS) -->
+      <!-- WRITING -->
       <section class="section reveal" id="writing">
         <h2 class="section-title">writing</h2>
         <div class="writing-list">
           
           <a class="writing-card reveal reveal-delay-1" href="https://medium.com/@Night_owllll11/whats-is-wsn-wireless-sensor-network-8a0f5408c8e6" target="_blank" rel="noreferrer" title="Read article on Medium">
             <div class="writing-header">
-              <h3 class="writing-title">
-                what is wsn (wireless sensor network)
-              </h3>
+              <h3 class="writing-title">what is wsn (wireless sensor network)</h3>
               <span class="writing-arrow">↗</span>
             </div>
-            <p class="writing-desc">
-              a short technical breakdown explaining the fundamentals of wireless sensor networks and why energy-aware routing matters.
-            </p>
+            <p class="writing-desc">a short technical breakdown explaining the fundamentals of wireless sensor networks and why energy-aware routing matters.</p>
             <div class="writing-meta">
               <span class="medium-badge">Medium</span>
               <span>• 3 min read</span>
@@ -517,14 +544,10 @@
 
           <a class="writing-card reveal reveal-delay-2" href="https://medium.com/@Night_owllll11/how-cpus-interact-with-so-many-different-devices-393e7dc8e1ec" target="_blank" rel="noreferrer" title="Read article on Medium">
             <div class="writing-header">
-              <h3 class="writing-title">
-                how cpus interact with so many different devices
-              </h3>
+              <h3 class="writing-title">how cpus interact with so many different devices</h3>
               <span class="writing-arrow">↗</span>
             </div>
-            <p class="writing-desc">
-              an intuitive explainer on hardware peripheral communication, memory mapping, and system interrupts.
-            </p>
+            <p class="writing-desc">an intuitive explainer on hardware peripheral communication, memory mapping, and system interrupts.</p>
             <div class="writing-meta">
               <span class="medium-badge">Medium</span>
               <span>• 4 min read</span>
@@ -551,6 +574,23 @@
       <span>design & code by nikita kumari</span>
       <span>© 2026</span>
     </footer>
+  </div>
+
+  <!-- ⌨️ COMMAND PALETTE MODAL -->
+  <div class="cmd-modal-overlay" id="cmdOverlay">
+    <div class="cmd-modal">
+      <div class="cmd-search-wrapper">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or search..." autocomplete="off"/>
+      </div>
+      <ul class="cmd-list" id="cmdList">
+        <!-- Rendered by JavaScript -->
+      </ul>
+      <div class="cmd-footer">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate, <kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to close</span>
+      </div>
+    </div>
   </div>
 
   <!-- 🐾 HIGH-END CHIBI COZY PET -->
@@ -711,6 +751,105 @@
     document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
     // ====================================================
+    // ⌨️ COMMAND PALETTE LOGIC
+    // ====================================================
+    const commandsData = [
+      { name: "Go to Projects", badge: "Navigation", action: () => document.getElementById("projects").scrollIntoView({ behavior: "smooth" }) },
+      { name: "Go to Work & Internships", badge: "Navigation", action: () => document.getElementById("work").scrollIntoView({ behavior: "smooth" }) },
+      { name: "Go to Writing", badge: "Navigation", action: () => document.getElementById("writing").scrollIntoView({ behavior: "smooth" }) },
+      { name: "Copy Email Address", badge: "Action", action: () => copyEmail() },
+      { name: "Open Resume (PDF)", badge: "Link", action: () => window.open("https://drive.google.com/", "_blank") },
+      { name: "Toggle Light/Dark Theme", badge: "Theme", action: () => themeToggle.click() },
+      { name: "Pet Kitty Cat 🐾", badge: "Fun", action: () => soundChibiMeow() }
+    ];
+
+    const cmdOverlay = document.getElementById("cmdOverlay");
+    const cmdInput = document.getElementById("cmdInput");
+    const cmdList = document.getElementById("cmdList");
+    const openCmdBtn = document.getElementById("openCmdBtn");
+    let selectedIndex = 0;
+
+    function renderCmdList(filterText = "") {
+      cmdList.innerHTML = "";
+      const filtered = commandsData.filter(c => c.name.toLowerCase().includes(filterText.toLowerCase()));
+      
+      if (filtered.length === 0) {
+        cmdList.innerHTML = `<li style="padding: 1rem; text-align: center; color: var(--soft);">No commands found</li>`;
+        return;
+      }
+
+      filtered.forEach((cmd, idx) => {
+        const li = document.createElement("li");
+        li.className = `cmd-item ${idx === selectedIndex ? 'selected' : ''}`;
+        li.innerHTML = `
+          <div class="cmd-item-left">
+            <span>${cmd.name}</span>
+          </div>
+          <span class="cmd-badge">${cmd.badge}</span>
+        `;
+        li.addEventListener("click", () => {
+          cmd.action();
+          closeCmdPalette();
+        });
+        cmdList.appendChild(li);
+      });
+    }
+
+    function openCmdPalette() {
+      cmdOverlay.classList.add("open");
+      cmdInput.value = "";
+      selectedIndex = 0;
+      renderCmdList();
+      setTimeout(() => cmdInput.focus(), 50);
+    }
+
+    function closeCmdPalette() {
+      cmdOverlay.classList.remove("open");
+    }
+
+    openCmdBtn.addEventListener("click", openCmdPalette);
+
+    cmdOverlay.addEventListener("click", (e) => {
+      if (e.target === cmdOverlay) closeCmdPalette();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        cmdOverlay.classList.contains("open") ? closeCmdPalette() : openCmdPalette();
+      } else if (e.key === "Escape" && cmdOverlay.classList.contains("open")) {
+        closeCmdPalette();
+      }
+    });
+
+    cmdInput.addEventListener("input", (e) => {
+      selectedIndex = 0;
+      renderCmdList(e.target.value);
+    });
+
+    cmdInput.addEventListener("keydown", (e) => {
+      const items = cmdList.querySelectorAll(".cmd-item");
+      if (items.length === 0) return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % items.length;
+        renderCmdList(cmdInput.value);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        renderCmdList(cmdInput.value);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const filtered = commandsData.filter(c => c.name.toLowerCase().includes(cmdInput.value.toLowerCase()));
+        if (filtered[selectedIndex]) {
+          filtered[selectedIndex].action();
+          closeCmdPalette();
+        }
+      }
+    });
+
+    // ====================================================
     // 🔊 MULTI-HARMONIC PET AUDIO SYNTHESIZER
     // ====================================================
     let audioCtx = null;
@@ -791,9 +930,7 @@
       localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
     });
 
-    // ====================================================
     // 💤 AUTOMATIC IDLE SLEEP ENGINE & CURSOR TRACKING
-    // ====================================================
     const petContainer = document.getElementById("petContainer");
     const pupilL = document.getElementById("pupilL");
     const pupilR = document.getElementById("pupilR");
