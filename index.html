@@ -249,9 +249,7 @@
 
     .footer { padding-top: 1.5rem; border-top: 1px solid var(--line); text-transform: lowercase; color: var(--soft); font-size: 0.85rem; display: flex; justify-content: space-between; }
 
-    /* =================================================== */
-    /* 🐾 CUTE INTERACTIVE PET COMPANION STYLES            */
-    /* =================================================== */
+    /* 🐾 PET COMPANION STYLES */
     .pet-container {
       position: fixed;
       bottom: 24px;
@@ -260,35 +258,33 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 6px;
+      gap: 4px;
     }
 
     .pet-speech-bubble {
       background: var(--pet-bg);
       color: var(--text);
       border: 1px solid var(--line-strong);
-      padding: 6px 12px;
+      padding: 4px 10px;
       border-radius: 12px;
-      font-size: 0.78rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      font-size: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       position: relative;
-      max-width: 180px;
       text-align: center;
       animation: bubbleFloat 3s ease-in-out infinite;
-      transition: all 0.3s ease;
-      transform-origin: bottom right;
+      transition: all 0.2s ease;
     }
 
     .pet-speech-bubble::after {
       content: '';
       position: absolute;
-      bottom: -6px;
-      right: 20px;
+      bottom: -5px;
+      right: 18px;
       width: 0;
       height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid var(--line-strong);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--line-strong);
     }
 
     .pet-controls {
@@ -308,48 +304,28 @@
       background: var(--toggle-bg);
       border: 1px solid var(--line);
       color: var(--text);
-      font-size: 0.75rem;
-      padding: 3px 7px;
+      font-size: 0.72rem;
+      padding: 2px 6px;
       border-radius: 99px;
       cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
+      transition: transform 0.15s ease;
     }
-    .pet-btn:hover {
-      transform: scale(1.1);
-      background: var(--tag-bg);
-    }
+    .pet-btn:hover { transform: scale(1.1); background: var(--tag-bg); }
 
     .pet-avatar {
-      width: 65px;
-      height: 65px;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
       position: relative;
       user-select: none;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .pet-avatar:hover { transform: scale(1.08); }
+    .pet-avatar:active { transform: scale(0.95); }
 
-    .pet-avatar:hover {
-      transform: scale(1.08);
-    }
-
-    .pet-avatar:active {
-      transform: scale(0.95);
-    }
-
-    /* Cat SVG & Animations */
-    .cat-ear {
-      transform-origin: center;
-      animation: earTwitch 4s ease-in-out infinite;
-    }
-
-    .cat-tail {
-      transform-origin: bottom left;
-      animation: tailWag 2.5s ease-in-out infinite;
-    }
-
-    .cat-eyes {
-      animation: catBlink 3.5s infinite;
-    }
+    .cat-ear { transform-origin: center; animation: earTwitch 4s ease-in-out infinite; }
+    .cat-tail { transform-origin: bottom left; animation: tailWag 2.5s ease-in-out infinite; }
+    .cat-eyes { animation: catBlink 3.5s infinite; }
 
     @keyframes tailWag {
       0%, 100% { transform: rotate(0deg); }
@@ -369,21 +345,20 @@
 
     @keyframes bubbleFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+      50% { transform: translateY(-3px); }
     }
 
-    /* Hearts effect when petting */
     .floating-heart {
       position: absolute;
       color: #e1a8b1;
-      font-size: 16px;
+      font-size: 15px;
       pointer-events: none;
       animation: floatHeart 1s ease-out forwards;
     }
 
     @keyframes floatHeart {
       0% { opacity: 1; transform: translateY(0) scale(0.6); }
-      100% { opacity: 0; transform: translateY(-40px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-35px) scale(1.2); }
     }
 
     @media (max-width: 560px) {
@@ -392,7 +367,7 @@
       .nav { gap: 0.8rem; }
       .footer { flex-direction: column; gap: 0.5rem; }
       .pet-container { bottom: 16px; right: 16px; }
-      .pet-avatar { width: 55px; height: 55px; }
+      .pet-avatar { width: 52px; height: 52px; }
     }
   </style>
 </head>
@@ -409,7 +384,6 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Resume link -->
         <a href="https://drive.google.com/" target="_blank" class="btn-resume" rel="noreferrer">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           resume
@@ -481,11 +455,10 @@
         </article>
       </section>
 
-      <!-- PROJECTS SECTION (DYNAMIC) -->
+      <!-- PROJECTS SECTION -->
       <section class="section" id="projects">
         <h2 class="section-title">stuff i've built</h2>
         
-        <!-- Filter Tabs -->
         <div class="filter-bar">
           <button class="filter-btn active" data-filter="all">all</button>
           <button class="filter-btn" data-filter="mobile">mobile</button>
@@ -493,9 +466,7 @@
           <button class="filter-btn" data-filter="research">research</button>
         </div>
 
-        <div class="projects-grid" id="projectsContainer">
-          <!-- Rendered dynamically by JavaScript below -->
-        </div>
+        <div class="projects-grid" id="projectsContainer"></div>
       </section>
 
       <!-- SKILLS -->
@@ -536,9 +507,9 @@
     </footer>
   </div>
 
-  <!-- 🐾 CUTE PET COMPANION FLOATING WIDGET -->
+  <!-- 🐾 PET COMPANION FLOATING WIDGET -->
   <div class="pet-container" id="petContainer">
-    <div class="pet-speech-bubble" id="petSpeech">meow! click me! 🐾</div>
+    <div class="pet-speech-bubble" id="petSpeech">meow~ 🐾</div>
     
     <div class="pet-controls">
       <button class="pet-btn" onclick="petTheCat(event)" title="Pet">💖 pet</button>
@@ -548,48 +519,29 @@
 
     <div class="pet-avatar" id="petAvatar" onclick="interactPet(event)">
       <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <!-- Tail -->
         <path class="cat-tail" d="M 25 75 Q 10 70 15 50 Q 18 40 25 45" stroke="#e1a8b1" stroke-width="6" fill="none" stroke-linecap="round"/>
-        
-        <!-- Cat Body -->
         <ellipse cx="50" cy="65" rx="28" ry="22" fill="#53514c"/>
         <ellipse cx="50" cy="65" rx="22" ry="17" fill="#7b8798"/>
-
-        <!-- Paws -->
         <ellipse cx="38" cy="83" rx="6" ry="4" fill="#f1f0ec"/>
         <ellipse cx="62" cy="83" rx="6" ry="4" fill="#f1f0ec"/>
-
-        <!-- Cat Head -->
         <circle cx="50" cy="42" r="20" fill="#53514c"/>
-
-        <!-- Ears -->
         <polygon class="cat-ear" points="33,30 25,12 42,25" fill="#53514c"/>
         <polygon class="cat-ear" points="33,30 27,16 40,26" fill="#e1a8b1"/>
-        
         <polygon class="cat-ear" points="67,30 75,12 58,25" fill="#53514c"/>
         <polygon class="cat-ear" points="67,30 73,16 60,26" fill="#e1a8b1"/>
-
-        <!-- Eyes -->
         <g class="cat-eyes" id="catEyes">
           <ellipse cx="42" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
           <ellipse cx="58" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
           <circle cx="43" cy="39" r="1.5" fill="#111111"/>
           <circle cx="59" cy="39" r="1.5" fill="#111111"/>
         </g>
-
-        <!-- Closed eyes for sleeping (hidden by default) -->
         <g id="catSleepEyes" style="display: none;">
           <path d="M 38 42 Q 42 45 46 42" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
           <path d="M 54 42 Q 58 45 62 42" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
         </g>
-
-        <!-- Nose & Whiskers -->
         <polygon points="50,46 47,43 53,43" fill="#e1a8b1"/>
-        
-        <!-- Whiskers -->
         <line x1="30" y1="44" x2="18" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
         <line x1="30" y1="47" x2="16" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
-        
         <line x1="70" y1="44" x2="82" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
         <line x1="70" y1="47" x2="84" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
       </svg>
@@ -599,9 +551,6 @@
   <div id="toast" class="toast">email copied to clipboard!</div>
 
   <script>
-    // ====================================================
-    // PROJECTS DATA ARRAY
-    // ====================================================
     const projectsData = [
       {
         title: "alzpal",
@@ -640,43 +589,25 @@
     function renderProjects(filter = "all") {
       const container = document.getElementById("projectsContainer");
       container.innerHTML = "";
-
       const filtered = filter === "all" ? projectsData : projectsData.filter(p => p.category === filter);
 
       filtered.forEach(p => {
         const card = document.createElement("article");
         card.className = "project-card";
-
-        const githubLink = p.github ? `
-          <a class="project-link-icon" href="${p.github}" target="_blank" rel="noreferrer" title="View Source Code">
-            <svg viewBox="0 0 24 24"><path d="M9 18c-4 1.2-4-2-6-2"></path><path d="M15 21v-3.1a3.4 3.4 0 0 0-.9-2.6c3 0 6-1.5 6-6.7A5.2 5.2 0 0 0 18.7 5 4.8 4.8 0 0 0 18.6 1S17.5.7 15 2.4a13.5 13.5 0 0 0-6 0C6.5.7 5.4 1 5.4 1A4.8 4.8 0 0 0 5.3 5 5.2 5.2 0 0 0 4 8.6c0 5.2 3 6.7 6 6.7a3.4 3.4 0 0 0-.9 2.6V21"></path></svg>
-          </a>
-        ` : "";
-
-        const demoLink = p.demo ? `
-          <a class="project-link-icon" href="${p.demo}" target="_blank" rel="noreferrer" title="View Live Demo / Drive">
-            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </a>
-        ` : "";
-
+        const githubLink = p.github ? `<a class="project-link-icon" href="${p.github}" target="_blank" rel="noreferrer" title="View Source Code"><svg viewBox="0 0 24 24"><path d="M9 18c-4 1.2-4-2-6-2"></path><path d="M15 21v-3.1a3.4 3.4 0 0 0-.9-2.6c3 0 6-1.5 6-6.7A5.2 5.2 0 0 0 18.7 5 4.8 4.8 0 0 0 18.6 1S17.5.7 15 2.4a13.5 13.5 0 0 0-6 0C6.5.7 5.4 1 5.4 1A4.8 4.8 0 0 0 5.3 5 5.2 5.2 0 0 0 4 8.6c0 5.2 3 6.7 6 6.7a3.4 3.4 0 0 0-.9 2.6V21"></path></svg></a>` : "";
+        const demoLink = p.demo ? `<a class="project-link-icon" href="${p.demo}" target="_blank" rel="noreferrer" title="View Live Demo / Drive"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>` : "";
         const tagsHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join("");
 
         card.innerHTML = `
           <div>
             <div class="project-header">
               <h3 class="project-title">${p.title}</h3>
-              <div class="project-links">
-                ${githubLink}
-                ${demoLink}
-              </div>
+              <div class="project-links">${githubLink}${demoLink}</div>
             </div>
             <p class="project-desc">${p.desc}</p>
           </div>
-          <div class="project-tags">
-            ${tagsHTML}
-          </div>
+          <div class="project-tags">${tagsHTML}</div>
         `;
-
         container.appendChild(card);
       });
     }
@@ -723,17 +654,105 @@
     }
 
     // ====================================================
-    // 🐾 PET INTERACTIVITY LOGIC
+    // 🔊 SYNTHESIZED PET SOUNDS (WEB AUDIO API)
     // ====================================================
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playMeowSound() {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        const now = ctx.currentTime;
+        osc.frequency.setValueAtTime(550, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.12);
+        osc.frequency.exponentialRampToValueAtTime(450, now + 0.3);
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.12, now + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } catch (e) {}
+    }
+
+    function playPurrSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        for (let i = 0; i < 5; i++) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(75 + Math.random() * 15, now + i * 0.07);
+          gain.gain.setValueAtTime(0.06, now + i * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.05);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.07);
+          osc.stop(now + i * 0.07 + 0.05);
+        }
+      } catch (e) {}
+    }
+
+    function playTreatSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+          gain.gain.setValueAtTime(0.08, now + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.1);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.07);
+          osc.stop(now + idx * 0.07 + 0.1);
+        });
+      } catch (e) {}
+    }
+
+    function playNapSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        [380, 320, 260].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.06, now + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.12);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.12);
+        });
+      } catch (e) {}
+    }
+
+    // PET INTERACTIVITY LOGIC (Short, cute, natural messages)
     const petQuotes = [
-      "meow! welcome to nikita's portfolio 🐾",
-      "did you check out alzpal yet? 📱",
-      "purrr... nikita writes clean code ✨",
-      "click me for pets! 💖",
-      "esp32 + edge impulse = magic! 🤖",
-      "looking for a cool intern? hire nikita! 🌟",
-      "need some tea or coffee? ☕",
-      "meow meow meow! 🐾"
+      "meow~ 🐾",
+      "mew! ✨",
+      "purrr 💕",
+      "nya~ 🌸",
+      "hi! 👋",
+      "prrr~ 💖",
+      "mew? 😸"
     ];
 
     let isSleeping = false;
@@ -758,16 +777,15 @@
     function petTheCat(e) {
       e.stopPropagation();
       if (isSleeping) wakeTheCat();
-      speakPet("purrrr... ❤️");
-
-      // Spawn floating hearts
+      playPurrSound();
+      speakPet("purrr~ 💕");
       const container = document.getElementById("petContainer");
       for (let i = 0; i < 3; i++) {
         const heart = document.createElement("span");
         heart.className = "floating-heart";
         heart.innerHTML = ["💖", "💕", "✨", "🐾"][Math.floor(Math.random() * 4)];
-        heart.style.right = (15 + Math.random() * 30) + "px";
-        heart.style.bottom = (50 + Math.random() * 20) + "px";
+        heart.style.right = (15 + Math.random() * 25) + "px";
+        heart.style.bottom = (45 + Math.random() * 15) + "px";
         container.appendChild(heart);
         setTimeout(() => heart.remove(), 1000);
       }
@@ -776,22 +794,25 @@
     function feedTheCat(e) {
       e.stopPropagation();
       if (isSleeping) wakeTheCat();
-      speakPet("nom nom nom! 🐟 yum!");
+      playTreatSound();
+      speakPet("nom nom! 🐟");
     }
 
     function napTheCat(e) {
       e.stopPropagation();
       isSleeping = true;
+      playNapSound();
       document.getElementById("catEyes").style.display = "none";
       document.getElementById("catSleepEyes").style.display = "block";
-      speakPet("zzz... 💤 sleeping!");
+      speakPet("zzz... 💤");
     }
 
     function wakeTheCat() {
       isSleeping = false;
+      playMeowSound();
       document.getElementById("catEyes").style.display = "block";
       document.getElementById("catSleepEyes").style.display = "none";
-      speakPet("yawn... i'm awake! 🐾");
+      speakPet("meow~ 🐾");
     }
 
     renderProjects();
