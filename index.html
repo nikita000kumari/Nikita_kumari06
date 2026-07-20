@@ -46,7 +46,6 @@
       --tag-bg: rgba(23, 23, 23, 0.05);
       --tag-text: #444;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.03);
-      --pet-bg: #fff;
     }
 
     body.dark-mode {
@@ -70,7 +69,6 @@
       --tag-bg: rgba(255, 255, 255, 0.08);
       --tag-text: #dcd8cf;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      --pet-bg: #1e1e24;
     }
 
     html { scroll-behavior: smooth; }
@@ -249,79 +247,25 @@
 
     .footer { padding-top: 1.5rem; border-top: 1px solid var(--line); text-transform: lowercase; color: var(--soft); font-size: 0.85rem; display: flex; justify-content: space-between; }
 
-    /* 🐾 PET COMPANION STYLES */
+    /* 🐾 CLEAN & MINIMALIST PET COMPANION STYLES (No text popups!) */
     .pet-container {
       position: fixed;
       bottom: 24px;
       right: 24px;
       z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
-
-    .pet-speech-bubble {
-      background: var(--pet-bg);
-      color: var(--text);
-      border: 1px solid var(--line-strong);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      position: relative;
-      text-align: center;
-      animation: bubbleFloat 3s ease-in-out infinite;
-      transition: all 0.2s ease;
-    }
-
-    .pet-speech-bubble::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      right: 18px;
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid var(--line-strong);
-    }
-
-    .pet-controls {
-      display: flex;
-      gap: 4px;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: all 0.2s ease;
-    }
-
-    .pet-container:hover .pet-controls {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .pet-btn {
-      background: var(--toggle-bg);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-size: 0.72rem;
-      padding: 2px 6px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-    .pet-btn:hover { transform: scale(1.1); background: var(--tag-bg); }
 
     .pet-avatar {
-      width: 60px;
-      height: 60px;
+      width: 58px;
+      height: 58px;
       cursor: pointer;
       position: relative;
-      user-select: none;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .pet-avatar:hover { transform: scale(1.08); }
-    .pet-avatar:active { transform: scale(0.95); }
+    .pet-avatar:hover { transform: scale(1.1); }
+    .pet-avatar:active { transform: scale(0.92); }
 
     .cat-ear { transform-origin: center; animation: earTwitch 4s ease-in-out infinite; }
     .cat-tail { transform-origin: bottom left; animation: tailWag 2.5s ease-in-out infinite; }
@@ -329,7 +273,7 @@
 
     @keyframes tailWag {
       0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(15deg); }
+      50% { transform: rotate(14deg); }
     }
 
     @keyframes earTwitch {
@@ -343,17 +287,12 @@
       96% { transform: scaleY(0.1); }
     }
 
-    @keyframes bubbleFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
-
     .floating-heart {
       position: absolute;
       color: #e1a8b1;
-      font-size: 15px;
+      font-size: 16px;
       pointer-events: none;
-      animation: floatHeart 1s ease-out forwards;
+      animation: floatHeart 0.9s ease-out forwards;
     }
 
     @keyframes floatHeart {
@@ -367,7 +306,7 @@
       .nav { gap: 0.8rem; }
       .footer { flex-direction: column; gap: 0.5rem; }
       .pet-container { bottom: 16px; right: 16px; }
-      .pet-avatar { width: 52px; height: 52px; }
+      .pet-avatar { width: 50px; height: 50px; }
     }
   </style>
 </head>
@@ -507,17 +446,9 @@
     </footer>
   </div>
 
-  <!-- 🐾 PET COMPANION FLOATING WIDGET -->
+  <!-- 🐾 CLEAN PET COMPANION (NO POPUP TEXT!) -->
   <div class="pet-container" id="petContainer">
-    <div class="pet-speech-bubble" id="petSpeech">meow~ 🐾</div>
-    
-    <div class="pet-controls">
-      <button class="pet-btn" onclick="petTheCat(event)" title="Pet">💖 pet</button>
-      <button class="pet-btn" onclick="feedTheCat(event)" title="Feed">🐟 treat</button>
-      <button class="pet-btn" onclick="napTheCat(event)" title="Sleep">💤 nap</button>
-    </div>
-
-    <div class="pet-avatar" id="petAvatar" onclick="interactPet(event)">
+    <div class="pet-avatar" id="petAvatar" title="Touch me!">
       <svg viewBox="0 0 100 100" width="100%" height="100%">
         <path class="cat-tail" d="M 25 75 Q 10 70 15 50 Q 18 40 25 45" stroke="#e1a8b1" stroke-width="6" fill="none" stroke-linecap="round"/>
         <ellipse cx="50" cy="65" rx="28" ry="22" fill="#53514c"/>
@@ -534,10 +465,6 @@
           <ellipse cx="58" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
           <circle cx="43" cy="39" r="1.5" fill="#111111"/>
           <circle cx="59" cy="39" r="1.5" fill="#111111"/>
-        </g>
-        <g id="catSleepEyes" style="display: none;">
-          <path d="M 38 42 Q 42 45 46 42" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M 54 42 Q 58 45 62 42" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
         </g>
         <polygon points="50,46 47,43 53,43" fill="#e1a8b1"/>
         <line x1="30" y1="44" x2="18" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
@@ -654,166 +581,73 @@
     }
 
     // ====================================================
-    // 🔊 SYNTHESIZED PET SOUNDS (WEB AUDIO API)
+    // 🔊 AUDIO CONTEXT & CUTE MEOW SOUND SYNTHESIZER
     // ====================================================
     let audioCtx = null;
-    function getAudioContext() {
+
+    function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-      return audioCtx;
     }
 
-    function playMeowSound() {
+    // Play a realistic soft synthesized meow
+    function playCatMeow() {
+      initAudio();
+      if (!audioCtx) return;
+
       try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
         osc.type = 'sine';
-        const now = ctx.currentTime;
-        osc.frequency.setValueAtTime(550, now);
-        osc.frequency.exponentialRampToValueAtTime(800, now + 0.12);
-        osc.frequency.exponentialRampToValueAtTime(450, now + 0.3);
+        
+        // Meow pitch contour: rise up quickly, then slide down
+        osc.frequency.setValueAtTime(450, now);
+        osc.frequency.exponentialRampToValueAtTime(750, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(350, now + 0.28);
+
         gain.gain.setValueAtTime(0.01, now);
-        gain.gain.linearRampToValueAtTime(0.12, now + 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
         osc.connect(gain);
-        gain.connect(ctx.destination);
+        gain.connect(audioCtx.destination);
+
         osc.start(now);
-        osc.stop(now + 0.3);
+        osc.stop(now + 0.28);
       } catch (e) {}
     }
 
-    function playPurrSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        for (let i = 0; i < 5; i++) {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(75 + Math.random() * 15, now + i * 0.07);
-          gain.gain.setValueAtTime(0.06, now + i * 0.07);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.05);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(now + i * 0.07);
-          osc.stop(now + i * 0.07 + 0.05);
-        }
-      } catch (e) {}
-    }
+    // Interactive Pet Touch Handler
+    const petAvatar = document.getElementById("petAvatar");
+    
+    function triggerPetTouch(e) {
+      if (e) e.preventDefault();
+      
+      // Play audio meow instantly
+      playCatMeow();
 
-    function playTreatSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        [523.25, 659.25, 783.99].forEach((freq, idx) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-          gain.gain.setValueAtTime(0.08, now + idx * 0.07);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.1);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(now + idx * 0.07);
-          osc.stop(now + idx * 0.07 + 0.1);
-        });
-      } catch (e) {}
-    }
+      // Trigger bounce animation & floating heart
+      petAvatar.style.transform = "scale(1.2)";
+      setTimeout(() => petAvatar.style.transform = "scale(1)", 200);
 
-    function playNapSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        [380, 320, 260].forEach((freq, idx) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
-          gain.gain.setValueAtTime(0.06, now + idx * 0.1);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.12);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(now + idx * 0.1);
-          osc.stop(now + idx * 0.1 + 0.12);
-        });
-      } catch (e) {}
-    }
-
-    // PET INTERACTIVITY LOGIC (Short, cute, natural messages)
-    const petQuotes = [
-      "meow~ 🐾",
-      "mew! ✨",
-      "purrr 💕",
-      "nya~ 🌸",
-      "hi! 👋",
-      "prrr~ 💖",
-      "mew? 😸"
-    ];
-
-    let isSleeping = false;
-
-    function speakPet(text) {
-      const speech = document.getElementById("petSpeech");
-      speech.textContent = text;
-      speech.style.transform = "scale(1.1)";
-      setTimeout(() => speech.style.transform = "scale(1)", 200);
-    }
-
-    function interactPet(e) {
-      if (isSleeping) {
-        wakeTheCat();
-        return;
-      }
-      petTheCat(e);
-      const randomQuote = petQuotes[Math.floor(Math.random() * petQuotes.length)];
-      speakPet(randomQuote);
-    }
-
-    function petTheCat(e) {
-      e.stopPropagation();
-      if (isSleeping) wakeTheCat();
-      playPurrSound();
-      speakPet("purrr~ 💕");
       const container = document.getElementById("petContainer");
-      for (let i = 0; i < 3; i++) {
-        const heart = document.createElement("span");
-        heart.className = "floating-heart";
-        heart.innerHTML = ["💖", "💕", "✨", "🐾"][Math.floor(Math.random() * 4)];
-        heart.style.right = (15 + Math.random() * 25) + "px";
-        heart.style.bottom = (45 + Math.random() * 15) + "px";
-        container.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
-      }
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.innerHTML = ["💖", "💕", "✨", "🐾"][Math.floor(Math.random() * 4)];
+      heart.style.right = (10 + Math.random() * 20) + "px";
+      heart.style.bottom = (40 + Math.random() * 15) + "px";
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 900);
     }
 
-    function feedTheCat(e) {
-      e.stopPropagation();
-      if (isSleeping) wakeTheCat();
-      playTreatSound();
-      speakPet("nom nom! 🐟");
-    }
-
-    function napTheCat(e) {
-      e.stopPropagation();
-      isSleeping = true;
-      playNapSound();
-      document.getElementById("catEyes").style.display = "none";
-      document.getElementById("catSleepEyes").style.display = "block";
-      speakPet("zzz... 💤");
-    }
-
-    function wakeTheCat() {
-      isSleeping = false;
-      playMeowSound();
-      document.getElementById("catEyes").style.display = "block";
-      document.getElementById("catSleepEyes").style.display = "none";
-      speakPet("meow~ 🐾");
-    }
+    // Support both Touch & Pointer/Click events for instant response on mobile & desktop
+    petAvatar.addEventListener("pointerdown", triggerPetTouch);
 
     renderProjects();
   </script>
