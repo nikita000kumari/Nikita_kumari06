@@ -155,7 +155,6 @@
       transform: translateY(12px);
     }
 
-    /* Light bulb glow effect */
     .bulb-glass {
       transition: fill 0.3s ease, filter 0.3s ease;
     }
@@ -285,7 +284,7 @@
 
     .footer { padding-top: 1.5rem; border-top: 1px solid var(--line); text-transform: lowercase; color: var(--soft); font-size: 0.85rem; display: flex; justify-content: space-between; }
 
-    /* 🐾 CLEAN PET COMPANION STYLES */
+    /* 🐾 BODY-PART SENSITIVE PET COMPANION STYLES */
     .pet-container {
       position: fixed;
       bottom: 24px;
@@ -296,28 +295,52 @@
     }
 
     .pet-avatar {
-      width: 58px;
-      height: 58px;
+      width: 62px;
+      height: 62px;
       cursor: pointer;
       position: relative;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .pet-avatar:hover { transform: scale(1.1); }
-    .pet-avatar:active { transform: scale(0.92); }
+
+    /* Interactive Body Parts */
+    .interactive-part {
+      cursor: pointer;
+      transition: filter 0.15s ease, transform 0.2s ease;
+    }
+    .interactive-part:hover {
+      filter: brightness(1.2);
+    }
 
     .cat-ear { transform-origin: center; animation: earTwitch 4s ease-in-out infinite; }
+    .cat-ear.twitching { animation: fastEarTwitch 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) 2; }
+    
     .cat-tail { transform-origin: bottom left; animation: tailWag 2.5s ease-in-out infinite; }
+    .cat-tail.wagging-fast { animation: fastTailWag 0.15s ease-in-out 6; }
+
     .cat-eyes { animation: catBlink 3.5s infinite; }
+
+    .cat-paw { transition: transform 0.2s ease; }
+    .cat-paw.tapping { transform: translateY(-4px); }
 
     @keyframes tailWag {
       0%, 100% { transform: rotate(0deg); }
       50% { transform: rotate(14deg); }
     }
 
+    @keyframes fastTailWag {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(25deg); }
+    }
+
     @keyframes earTwitch {
       0%, 90%, 100% { transform: rotate(0deg); }
       93% { transform: rotate(-8deg); }
       96% { transform: rotate(5deg); }
+    }
+
+    @keyframes fastEarTwitch {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(18deg); }
     }
 
     @keyframes catBlink {
@@ -335,7 +358,7 @@
 
     @keyframes floatHeart {
       0% { opacity: 1; transform: translateY(0) scale(0.6); }
-      100% { opacity: 0; transform: translateY(-35px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-38px) scale(1.2); }
     }
 
     @media (max-width: 560px) {
@@ -344,7 +367,7 @@
       .nav { gap: 0.8rem; }
       .footer { flex-direction: column; gap: 0.5rem; }
       .pet-container { bottom: 16px; right: 16px; }
-      .pet-avatar { width: 50px; height: 50px; }
+      .pet-avatar { width: 54px; height: 54px; }
     }
   </style>
 </head>
@@ -366,20 +389,15 @@
           resume
         </a>
 
-        <!-- 💡 PULL-CHAIN LIGHT BULB THEME SWITCHER -->
+        <!-- 💡 VINTAGE PULL-CHAIN LIGHT BULB THEME SWITCHER -->
         <button class="pull-chain-toggle" id="themeToggle" type="button" aria-label="Toggle light bulb theme">
           <div class="bulb-wrapper" id="bulbWrapper">
             <svg viewBox="0 0 40 60" width="100%" height="100%">
-              <!-- Ceiling Mount Wire -->
               <line class="chain-cord" x1="20" y1="0" x2="20" y2="15" stroke="var(--soft)" stroke-width="2"/>
-              <!-- Bulb Socket / Cap -->
               <rect x="14" y="15" width="12" height="6" rx="1" fill="var(--soft)"/>
               <rect x="15" y="21" width="10" height="3" fill="var(--line-strong)"/>
-              <!-- Bulb Glass -->
               <path class="bulb-glass" d="M 20 24 C 11 24, 8 33, 11 41 C 13 46, 16 49, 16 52 L 24 52 C 24 49, 27 46, 29 41 C 32 33, 29 24, 20 24 Z" stroke-width="1.8"/>
-              <!-- Bulb Filament -->
               <path class="bulb-filament" d="M 17 48 L 18 36 L 20 39 L 22 36 L 23 48" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Pull Wire / String hanging from bottom -->
               <line x1="20" y1="52" x2="20" y2="58" stroke="var(--soft)" stroke-width="1.5"/>
               <circle cx="20" cy="58" r="1.5" fill="var(--soft)"/>
             </svg>
@@ -499,31 +517,55 @@
     </footer>
   </div>
 
-  <!-- 🐾 PET COMPANION AVATAR -->
+  <!-- 🐾 BODY-PART INTERACTIVE PET CAT SVG -->
   <div class="pet-container" id="petContainer">
-    <div class="pet-avatar" id="petAvatar" title="Touch me!">
+    <div class="pet-avatar" id="petAvatar">
       <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <path class="cat-tail" d="M 25 75 Q 10 70 15 50 Q 18 40 25 45" stroke="#e1a8b1" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <ellipse cx="50" cy="65" rx="28" ry="22" fill="#53514c"/>
-        <ellipse cx="50" cy="65" rx="22" ry="17" fill="#7b8798"/>
-        <ellipse cx="38" cy="83" rx="6" ry="4" fill="#f1f0ec"/>
-        <ellipse cx="62" cy="83" rx="6" ry="4" fill="#f1f0ec"/>
-        <circle cx="50" cy="42" r="20" fill="#53514c"/>
-        <polygon class="cat-ear" points="33,30 25,12 42,25" fill="#53514c"/>
-        <polygon class="cat-ear" points="33,30 27,16 40,26" fill="#e1a8b1"/>
-        <polygon class="cat-ear" points="67,30 75,12 58,25" fill="#53514c"/>
-        <polygon class="cat-ear" points="67,30 73,16 60,26" fill="#e1a8b1"/>
-        <g class="cat-eyes" id="catEyes">
-          <ellipse cx="42" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
-          <ellipse cx="58" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
-          <circle cx="43" cy="39" r="1.5" fill="#111111"/>
-          <circle cx="59" cy="39" r="1.5" fill="#111111"/>
+        <!-- Tail -->
+        <path id="catTail" class="cat-tail interactive-part" d="M 25 75 Q 10 70 15 50 Q 18 40 25 45" stroke="#e1a8b1" stroke-width="7" fill="none" stroke-linecap="round" title="Touch tail!"/>
+        
+        <!-- Cat Body / Belly -->
+        <g id="catBody" class="interactive-part" title="Rub belly!">
+          <ellipse cx="50" cy="65" rx="28" ry="22" fill="#53514c"/>
+          <ellipse cx="50" cy="65" rx="22" ry="17" fill="#7b8798"/>
         </g>
-        <polygon points="50,46 47,43 53,43" fill="#e1a8b1"/>
-        <line x1="30" y1="44" x2="18" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
-        <line x1="30" y1="47" x2="16" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
-        <line x1="70" y1="44" x2="82" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
-        <line x1="70" y1="47" x2="84" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
+        
+        <!-- Paws -->
+        <ellipse id="catPawLeft" class="cat-paw interactive-part" cx="38" cy="83" rx="6" ry="4" fill="#f1f0ec" title="High five paw!"/>
+        <ellipse id="catPawRight" class="cat-paw interactive-part" cx="62" cy="83" rx="6" ry="4" fill="#f1f0ec" title="High five paw!"/>
+
+        <!-- Head / Forehead -->
+        <g id="catHead" class="interactive-part" title="Pet head!">
+          <circle cx="50" cy="42" r="20" fill="#53514c"/>
+
+          <!-- Left & Right Ears -->
+          <g id="catEars" class="interactive-part" title="Twitch ears!">
+            <polygon class="cat-ear" points="33,30 25,12 42,25" fill="#53514c"/>
+            <polygon class="cat-ear" points="33,30 27,16 40,26" fill="#e1a8b1"/>
+            <polygon class="cat-ear" points="67,30 75,12 58,25" fill="#53514c"/>
+            <polygon class="cat-ear" points="67,30 73,16 60,26" fill="#e1a8b1"/>
+          </g>
+
+          <!-- Eyes -->
+          <g class="cat-eyes" id="catEyes">
+            <ellipse cx="42" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
+            <ellipse cx="58" cy="40" rx="3.5" ry="4.5" fill="#f5d4da"/>
+            <circle cx="43" cy="39" r="1.5" fill="#111111"/>
+            <circle cx="59" cy="39" r="1.5" fill="#111111"/>
+          </g>
+          
+          <!-- Closed happy eyes when head is petted -->
+          <g id="catHappyEyes" style="display: none;">
+            <path d="M 38 41 Q 42 37 46 41" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M 54 41 Q 58 37 62 41" stroke="#f1f0ec" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <polygon points="50,46 47,43 53,43" fill="#e1a8b1"/>
+          <line x1="30" y1="44" x2="18" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
+          <line x1="30" y1="47" x2="16" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
+          <line x1="70" y1="44" x2="82" y2="42" stroke="#c5c0b7" stroke-width="1.5"/>
+          <line x1="70" y1="47" x2="84" y2="48" stroke="#c5c0b7" stroke-width="1.5"/>
+        </g>
       </svg>
     </div>
   </div>
@@ -623,7 +665,7 @@
     }
 
     // ====================================================
-    // 🔊 AUDIO SYNTHESIZER (WEB AUDIO API)
+    // 🔊 WEB AUDIO API SYNTHESIZER
     // ====================================================
     let audioCtx = null;
     function initAudio() {
@@ -635,7 +677,7 @@
       }
     }
 
-    // Mechanical Light Bulb String Pull-Switch Click Sound
+    // 💡 Pull-Chain Light Bulb Click Sound
     function playSwitchClickSound(isDark) {
       initAudio();
       if (!audioCtx) return;
@@ -643,113 +685,113 @@
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-
         osc.type = isDark ? 'triangle' : 'sine';
         osc.frequency.setValueAtTime(isDark ? 280 : 550, now);
         osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
-
         gain.gain.setValueAtTime(0.2, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.04);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now); osc.stop(now + 0.04);
       } catch (e) {}
     }
 
-    // VARIETY OF 4 SUPER CUTE PET VOICE SYNTHESIZERS
-    function playPetVoice() {
+    // 🐾 SPECIFIC BODY-PART SOUND SYNTHESIZERS
+    // 1. Ears Touch sound (High fast chirp)
+    function soundEarChirp() {
       initAudio();
       if (!audioCtx) return;
-
-      const voices = [
-        // 1. High playful chirp
-        () => {
-          const now = audioCtx.currentTime;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(650, now);
-          osc.frequency.exponentialRampToValueAtTime(950, now + 0.09);
-          osc.frequency.exponentialRampToValueAtTime(550, now + 0.22);
-          gain.gain.setValueAtTime(0.01, now);
-          gain.gain.linearRampToValueAtTime(0.18, now + 0.06);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(now); osc.stop(now + 0.22);
-        },
-        // 2. Sweet double trill meow
-        () => {
-          const now = audioCtx.currentTime;
-          [580, 780].forEach((freq, i) => {
-            const osc = ctx = audioCtx;
-            const o = ctx.createOscillator();
-            const g = ctx.createGain();
-            o.type = 'sine';
-            o.frequency.setValueAtTime(freq, now + i * 0.07);
-            o.frequency.exponentialRampToValueAtTime(freq + 140, now + i * 0.07 + 0.06);
-            g.gain.setValueAtTime(0.14, now + i * 0.07);
-            g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.07);
-            o.connect(g); g.connect(ctx.destination);
-            o.start(now + i * 0.07); o.stop(now + i * 0.07 + 0.07);
-          });
-        },
-        // 3. Tiny kitten mew
-        () => {
-          const now = audioCtx.currentTime;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(750, now);
-          osc.frequency.exponentialRampToValueAtTime(1100, now + 0.1);
-          osc.frequency.exponentialRampToValueAtTime(600, now + 0.25);
-          gain.gain.setValueAtTime(0.01, now);
-          gain.gain.linearRampToValueAtTime(0.15, now + 0.05);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(now); osc.stop(now + 0.25);
-        },
-        // 4. Soft purr chirp
-        () => {
-          const now = audioCtx.currentTime;
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(480, now);
-          osc.frequency.exponentialRampToValueAtTime(620, now + 0.15);
-          gain.gain.setValueAtTime(0.01, now);
-          gain.gain.linearRampToValueAtTime(0.16, now + 0.07);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(now); osc.stop(now + 0.2);
-        }
-      ];
-
-      const randomVoice = voices[Math.floor(Math.random() * voices.length)];
-      randomVoice();
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, now);
+      osc.frequency.exponentialRampToValueAtTime(1150, now + 0.07);
+      osc.frequency.exponentialRampToValueAtTime(700, now + 0.16);
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.18, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.16);
     }
 
-    // 💡 Pull-Chain Light Bulb Theme Switcher Handler
+    // 2. Head Pet sound (Deep affectionate purr rumble)
+    function soundHeadPurr() {
+      initAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      for (let i = 0; i < 4; i++) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(85 + Math.random() * 15, now + i * 0.06);
+        gain.gain.setValueAtTime(0.12, now + i * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.05);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.06); osc.stop(now + i * 0.06 + 0.05);
+      }
+    }
+
+    // 3. Belly Rub sound (Playful bouncy meow)
+    function soundBellyBounce() {
+      initAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(450, now);
+      osc.frequency.exponentialRampToValueAtTime(780, now + 0.11);
+      osc.frequency.exponentialRampToValueAtTime(400, now + 0.26);
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.26);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.26);
+    }
+
+    // 4. Paw High-Five sound (Cute squeak)
+    function soundPawSqueak() {
+      initAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(950, now);
+      osc.frequency.exponentialRampToValueAtTime(1300, now + 0.08);
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.16, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.12);
+    }
+
+    // 5. Tail Touch sound (Surprise chirp)
+    function soundTailChirp() {
+      initAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(900, now + 0.08);
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.17, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + 0.14);
+    }
+
+    // 💡 Pull-Chain Light Bulb Handler
     themeToggle.addEventListener("click", () => {
       const isDark = document.body.classList.toggle("dark-mode");
       playSwitchClickSound(isDark);
       localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
     });
 
-    // 🐾 Touch Pet Handler
-    const petAvatar = document.getElementById("petAvatar");
-    
-    function triggerPetTouch(e) {
-      if (e) e.preventDefault();
-      
-      playPetVoice();
-
-      // Bounce & floating hearts
-      petAvatar.style.transform = "scale(1.2)";
-      setTimeout(() => petAvatar.style.transform = "scale(1)", 200);
-
+    // Helper to spawn floating heart
+    function spawnHeart() {
       const container = document.getElementById("petContainer");
       const heart = document.createElement("span");
       heart.className = "floating-heart";
@@ -760,7 +802,73 @@
       setTimeout(() => heart.remove(), 900);
     }
 
-    petAvatar.addEventListener("pointerdown", triggerPetTouch);
+    // 🐾 BIND SPECIFIC BODY-PART TOUCH HANDLERS
+    const catHead = document.getElementById("catHead");
+    const catEars = document.getElementById("catEars");
+    const catBody = document.getElementById("catBody");
+    const catPawLeft = document.getElementById("catPawLeft");
+    const catPawRight = document.getElementById("catPawRight");
+    const catTail = document.getElementById("catTail");
+
+    const catEyes = document.getElementById("catEyes");
+    const catHappyEyes = document.getElementById("catHappyEyes");
+
+    // 1. Touch Head (Purr + happy closed eyes)
+    catHead.addEventListener("pointerdown", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      soundHeadPurr();
+      spawnHeart();
+      catEyes.style.display = "none";
+      catHappyEyes.style.display = "block";
+      setTimeout(() => {
+        catEyes.style.display = "block";
+        catHappyEyes.style.display = "none";
+      }, 700);
+    });
+
+    // 2. Touch Ears (High chirp + ear twitch)
+    catEars.addEventListener("pointerdown", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      soundEarChirp();
+      spawnHeart();
+      const ears = document.querySelectorAll(".cat-ear");
+      ears.forEach(ear => ear.classList.add("twitching"));
+      setTimeout(() => ears.forEach(ear => ear.classList.remove("twitching")), 600);
+    });
+
+    // 3. Touch Body / Belly (Bounce + bouncy meow)
+    catBody.addEventListener("pointerdown", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      soundBellyBounce();
+      spawnHeart();
+      document.getElementById("petAvatar").style.transform = "scale(1.2) translateY(-4px)";
+      setTimeout(() => document.getElementById("petAvatar").style.transform = "scale(1)", 250);
+    });
+
+    // 4. Touch Paws (High-five tap + squeak)
+    [catPawLeft, catPawRight].forEach(paw => {
+      paw.addEventListener("pointerdown", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        soundPawSqueak();
+        spawnHeart();
+        paw.classList.add("tapping");
+        setTimeout(() => paw.classList.remove("tapping"), 200);
+      });
+    });
+
+    // 5. Touch Tail (Fast tail wag + surprise chirp)
+    catTail.addEventListener("pointerdown", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      soundTailChirp();
+      spawnHeart();
+      catTail.classList.add("wagging-fast");
+      setTimeout(() => catTail.classList.remove("wagging-fast"), 800);
+    });
 
     renderProjects();
   </script>
