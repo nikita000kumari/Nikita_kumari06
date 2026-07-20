@@ -47,6 +47,7 @@
       --tag-text: #444;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.03);
       --modal-bg: rgba(255, 255, 255, 0.95);
+      --chart-filter: none;
     }
 
     body.dark-mode {
@@ -71,6 +72,7 @@
       --tag-text: #dcd8cf;
       --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
       --modal-bg: rgba(18, 18, 22, 0.95);
+      --chart-filter: invert(0.92) hue-rotate(190deg) brightness(1.05);
     }
 
     html { scroll-behavior: smooth; }
@@ -245,7 +247,7 @@
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag { font-size: 0.75rem; background: var(--tag-bg); color: var(--tag-text); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid var(--line); }
 
-    /* 📊 GITHUB CONTRIBUTION GRID MATCHES SITE ACCENT COLOR */
+    /* 📊 GITHUB CONTRIBUTION GRID STYLES */
     .github-card {
       background: var(--bg-card);
       border: 1px solid var(--line);
@@ -277,6 +279,7 @@
       width: 100%;
       overflow-x: auto;
       padding-bottom: 0.25rem;
+      border-radius: 6px;
     }
 
     .github-chart-img {
@@ -284,7 +287,9 @@
       min-width: 650px;
       height: auto;
       display: block;
-      transition: opacity 0.3s ease;
+      filter: var(--chart-filter);
+      transition: filter 0.3s ease;
+      border-radius: 4px;
     }
 
     /* 📝 INTERACTIVE WRITING CARDS */
@@ -744,22 +749,10 @@
 
     const timeElement = document.getElementById("localTime");
     const themeToggle = document.getElementById("themeToggle");
-    const githubChartImg = document.getElementById("githubChartImg");
     const savedTheme = localStorage.getItem("nikita-theme");
-
-    function updateGithubChartTheme(isDark) {
-      if (githubChartImg) {
-        githubChartImg.src = isDark 
-          ? "https://ghchart.rshah.org/e1a8b1/Nikita000kumari" 
-          : "https://ghchart.rshah.org/b06f7a/Nikita000kumari";
-      }
-    }
 
     if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.body.classList.add("dark-mode");
-      updateGithubChartTheme(true);
-    } else {
-      updateGithubChartTheme(false);
     }
 
     function updateTime() {
@@ -967,7 +960,6 @@
     themeToggle.addEventListener("click", () => {
       const isDark = document.body.classList.toggle("dark-mode");
       playSwitchClickSound(isDark);
-      updateGithubChartTheme(isDark);
       localStorage.setItem("nikita-theme", isDark ? "dark" : "light");
     });
 
