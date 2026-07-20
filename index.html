@@ -219,7 +219,7 @@
     .social-link:hover, .inline-link:hover { color: var(--accent); text-decoration-color: var(--link-underline-hover); }
 
     .section { margin-bottom: 3rem; }
-    .section-title { margin-bottom: 1.2rem; color: var(--text); font-size: 1.4rem; font-weight: 500; text-transform: lowercase; }
+    .section-title { color: var(--text); font-size: 1.4rem; font-weight: 500; text-transform: lowercase; margin-bottom: 0.4rem; }
 
     /* Filter Bar */
     .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -292,22 +292,146 @@
       border-radius: 4px;
     }
 
-    /* 📝 INTERACTIVE WRITING CARDS */
-    .writing-list { display: grid; gap: 1rem; }
-    .writing-card {
-      display: block; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px;
-      padding: 1.1rem 1.25rem; text-decoration: none !important;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    /* 📰 LATEST ARTICLES SECTION (MATCHES REFERENCE IMAGE) */
+    .articles-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
     }
-    .writing-card:hover { transform: translateY(-2px); border-color: var(--line-strong); background: var(--tag-bg); box-shadow: var(--card-shadow); }
-    .writing-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
-    .writing-title { color: var(--link); font-size: 1.05rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s ease; }
-    .writing-card:hover .writing-title { color: var(--accent); text-decoration: underline; text-underline-offset: 0.24rem; }
-    .writing-arrow { color: var(--link); transition: transform 0.2s ease, color 0.2s ease; font-size: 1.1rem; display: inline-block; }
-    .writing-card:hover .writing-arrow { transform: translate(3px, -3px); color: var(--accent); }
-    .writing-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
-    .writing-meta { display: flex; align-items: center; gap: 0.75rem; font-size: 0.78rem; color: var(--soft); }
-    .medium-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--tag-bg); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--line); color: var(--tag-text); font-weight: 500; }
+
+    .articles-subtext {
+      color: var(--muted);
+      font-size: 0.88rem;
+      max-width: 50ch;
+      line-height: 1.6;
+    }
+
+    .view-all-link {
+      color: var(--muted);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .view-all-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card-link {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none !important;
+      color: inherit;
+    }
+
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .article-img-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background: var(--tag-bg);
+    }
+
+    .article-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .article-card:hover .article-img {
+      transform: scale(1.05);
+    }
+
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .article-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .article-card:hover .article-card-title {
+      color: var(--link);
+    }
+
+    .article-card-desc {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--soft);
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .read-article-btn {
+      font-weight: 500;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .article-card:hover .read-article-btn {
+      color: var(--link);
+      transform: translateX(2px);
+    }
 
     .list { list-style: none; display: grid; gap: 0.9rem; color: var(--muted); }
     .list li { padding-left: 1.25rem; position: relative; max-width: 64ch; line-height: 1.7; }
@@ -415,6 +539,7 @@
       .footer { flex-direction: column; gap: 0.5rem; }
       .pet-container { bottom: 16px; right: 16px; }
       .pet-avatar-wrapper { width: 60px; height: 60px; }
+      .articles-header-row { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -556,34 +681,63 @@
         </div>
       </section>
 
-      <!-- WRITING -->
+      <!-- 📰 LATEST ARTICLES SECTION (REPLICATING YOUR REFERENCE IMAGE) -->
       <section class="section reveal" id="writing">
-        <h2 class="section-title">writing</h2>
-        <div class="writing-list">
-          
-          <a class="writing-card reveal reveal-delay-1" href="https://medium.com/@Night_owllll11/whats-is-wsn-wireless-sensor-network-8a0f5408c8e6" target="_blank" rel="noreferrer" title="Read article on Medium">
-            <div class="writing-header">
-              <h3 class="writing-title">what is wsn (wireless sensor network)</h3>
-              <span class="writing-arrow">↗</span>
-            </div>
-            <p class="writing-desc">a short technical breakdown explaining the fundamentals of wireless sensor networks and why energy-aware routing matters.</p>
-            <div class="writing-meta">
-              <span class="medium-badge">Medium</span>
-              <span>• 3 min read</span>
-            </div>
-          </a>
+        <div class="articles-header-row">
+          <div>
+            <h2 class="section-title">latest articles</h2>
+            <p class="articles-subtext">sharing what i'm learning about software engineering, embedded systems, and wsn routing.</p>
+          </div>
+          <a class="view-all-link" href="https://medium.com/@Night_owllll11" target="_blank" rel="noreferrer">view all ↗</a>
+        </div>
 
-          <a class="writing-card reveal reveal-delay-2" href="https://medium.com/@Night_owllll11/how-cpus-interact-with-so-many-different-devices-393e7dc8e1ec" target="_blank" rel="noreferrer" title="Read article on Medium">
-            <div class="writing-header">
-              <h3 class="writing-title">how cpus interact with so many different devices</h3>
-              <span class="writing-arrow">↗</span>
-            </div>
-            <p class="writing-desc">an intuitive explainer on hardware peripheral communication, memory mapping, and system interrupts.</p>
-            <div class="writing-meta">
-              <span class="medium-badge">Medium</span>
-              <span>• 4 min read</span>
-            </div>
-          </a>
+        <div class="articles-grid">
+          
+          <article class="article-card reveal reveal-delay-1">
+            <a href="https://medium.com/@Night_owllll11/whats-is-wsn-wireless-sensor-network-8a0f5408c8e6" target="_blank" rel="noreferrer" class="article-card-link">
+              <div class="article-img-wrapper">
+                <img src="assets/wsn_thumb.jpg" alt="WSN Article Thumbnail" class="article-img"/>
+              </div>
+              <div class="article-content">
+                <div>
+                  <h3 class="article-card-title">What is WSN (Wireless Sensor Network)</h3>
+                  <p class="article-card-desc">A short technical breakdown explaining the fundamentals of wireless sensor networks and energy-aware routing protocols.</p>
+                  <div class="article-tags">
+                    <span class="tag">wsn</span>
+                    <span class="tag">networking</span>
+                    <span class="tag">iot</span>
+                  </div>
+                </div>
+                <div class="article-card-footer">
+                  <span>3 min read • May 2024</span>
+                  <span class="read-article-btn">Read Article ↗</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="article-card reveal reveal-delay-2">
+            <a href="https://medium.com/@Night_owllll11/how-cpus-interact-with-so-many-different-devices-393e7dc8e1ec" target="_blank" rel="noreferrer" class="article-card-link">
+              <div class="article-img-wrapper">
+                <img src="assets/cpu_thumb.jpg" alt="CPU Article Thumbnail" class="article-img"/>
+              </div>
+              <div class="article-content">
+                <div>
+                  <h3 class="article-card-title">How CPUs Interact With So Many Different Devices</h3>
+                  <p class="article-card-desc">An intuitive explainer on hardware peripheral communication, memory mapping, and system interrupts.</p>
+                  <div class="article-tags">
+                    <span class="tag">hardware</span>
+                    <span class="tag">cpu</span>
+                    <span class="tag">systems</span>
+                  </div>
+                </div>
+                <div class="article-card-footer">
+                  <span>4 min read • June 2024</span>
+                  <span class="read-article-btn">Read Article ↗</span>
+                </div>
+              </div>
+            </a>
+          </article>
 
         </div>
       </section>
@@ -789,7 +943,7 @@
       { name: "Go to Work & Internships", badge: "Navigation", action: () => document.getElementById("work").scrollIntoView({ behavior: "smooth" }) },
       { name: "Go to Skills & Tools", badge: "Navigation", action: () => document.getElementById("skills").scrollIntoView({ behavior: "smooth" }) },
       { name: "Go to GitHub Activity", badge: "Navigation", action: () => document.getElementById("activity").scrollIntoView({ behavior: "smooth" }) },
-      { name: "Go to Writing", badge: "Navigation", action: () => document.getElementById("writing").scrollIntoView({ behavior: "smooth" }) },
+      { name: "Go to Latest Articles", badge: "Navigation", action: () => document.getElementById("writing").scrollIntoView({ behavior: "smooth" }) },
       { name: "Copy Email Address", badge: "Action", action: () => copyEmail() },
       { name: "Open Resume (PDF)", badge: "Link", action: () => window.open("https://drive.google.com/", "_blank") },
       { name: "Toggle Light/Dark Theme", badge: "Theme", action: () => themeToggle.click() },
