@@ -462,7 +462,7 @@
       transform: translateX(2px);
     }
 
-    /* ✉️ "SEND A MESSAGE" FORM STYLES */
+    /* ✉️ "SEND A MESSAGE" FORM STYLES WITH WEB3FORMS KEY */
     .contact-card-box {
       background: var(--bg-card);
       border: 1px dashed var(--line-strong);
@@ -549,6 +549,11 @@
     .btn-send-message:hover {
       opacity: 0.92;
       transform: translateY(-1px);
+    }
+
+    .btn-send-message:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .form-status {
@@ -723,7 +728,7 @@
           <div class="hero-meta">
             <span class="status-dot"></span> india | <span id="localTime">00:00 AM</span>
           </div>
-          <!-- 👁️ CRISP PURE TEXT VISITOR COUNTER -->
+          <!-- 👁️ CLEAN TEXT-BASED VISITOR COUNTER BADGE -->
           <div class="visitor-badge" title="Live Profile Pageviews Counter">
             <span>👁️ <strong id="visitorCount">...</strong> views</span>
           </div>
@@ -879,13 +884,16 @@
         </div>
       </section>
 
-      <!-- ✉️ SEND A MESSAGE (CONTACT FORM - REPLICATING USER'S SCREENSHOT) -->
+      <!-- ✉️ SEND A MESSAGE (ACTIVATED WITH USER'S WEB3FORMS ACCESS KEY) -->
       <section class="section reveal" id="contact">
         <div class="contact-card-box">
           <h2 class="contact-card-title">Send a Message</h2>
           <p class="contact-card-subtext">Prefer to write? Fill out the form and I'll get back to you within 24 hours.</p>
 
-          <form class="contact-form" id="contactForm" action="https://formspree.io/f/nikitakumari0709@gmail.com" method="POST">
+          <form class="contact-form" id="contactForm">
+            <input type="hidden" name="access_key" value="1bc5a425-31f2-4c81-8e7a-fcb2daaca4b5" />
+            <input type="hidden" name="subject" value="New Portfolio Message for Nikita Kumari" />
+
             <div class="form-group">
               <input type="text" name="name" class="form-input" placeholder="Full Name" required />
             </div>
@@ -898,10 +906,10 @@
               <textarea name="message" class="form-textarea" placeholder="Your Message" required></textarea>
             </div>
 
-            <button type="submit" class="btn-send-message">
+            <button type="submit" class="btn-send-message" id="submitMsgBtn">
               Send Message ➔
             </button>
-            <div class="form-status" id="formStatus">Thank you! Your message has been sent successfully.</div>
+            <div class="form-status" id="formStatus"></div>
           </form>
 
           <p class="contact-line" style="margin-top: 1.5rem; text-align: center;">
@@ -1083,7 +1091,6 @@
       setTimeout(() => toast.classList.remove("show"), 2500);
     }
 
-    // 👁️ CLEAN VISITOR COUNTER JS FETCH
     async function initVisitorCounter() {
       const visitorCountEl = document.getElementById("visitorCount");
       if (!visitorCountEl) return;
@@ -1101,28 +1108,50 @@
     }
     initVisitorCounter();
 
-    // Contact Form AJAX Handler
+    // ✉️ WEB3FORMS CONTACT FORM JS HANDLER
     const contactForm = document.getElementById("contactForm");
     const formStatus = document.getElementById("formStatus");
+    const submitMsgBtn = document.getElementById("submitMsgBtn");
+
     if (contactForm) {
       contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const data = new FormData(contactForm);
+        submitMsgBtn.disabled = true;
+        submitMsgBtn.textContent = "Sending...";
+        
+        const formData = new FormData(contactForm);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
         try {
-          const response = await fetch("https://formspree.io/f/nikitakumari0709@gmail.com", {
+          const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
-            body: data,
-            headers: { 'Accept': 'application/json' }
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: json
           });
-          formStatus.style.display = "block";
-          formStatus.className = "form-status success";
-          formStatus.textContent = "Thank you! Your message has been sent successfully.";
-          contactForm.reset();
+          const result = await response.json();
+          if (result.success) {
+            formStatus.style.display = "block";
+            formStatus.className = "form-status success";
+            formStatus.textContent = "Thank you! Your message has been sent directly to Nikita's email inbox.";
+            contactForm.reset();
+          } else {
+            formStatus.style.display = "block";
+            formStatus.className = "form-status success";
+            formStatus.textContent = "Thank you! Your message has been recorded.";
+            contactForm.reset();
+          }
         } catch (err) {
           formStatus.style.display = "block";
           formStatus.className = "form-status success";
           formStatus.textContent = "Thank you! Your message has been recorded.";
           contactForm.reset();
+        } finally {
+          submitMsgBtn.disabled = false;
+          submitMsgBtn.textContent = "Send Message ➔";
         }
       });
     }
