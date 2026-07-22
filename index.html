@@ -218,24 +218,6 @@
       width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
     }
 
-    /* 👁️ CLEAN TEXT-BASED VISITOR COUNTER BADGE */
-    .visitor-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--tag-bg);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .visitor-badge strong {
-      color: var(--link);
-    }
-
     .hero-copy { max-width: 60ch; margin-bottom: 1.2rem; line-height: 1.7; color: var(--muted); }
 
     .socials { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--muted); }
@@ -728,10 +710,6 @@
           <div class="hero-meta">
             <span class="status-dot"></span> india | <span id="localTime">00:00 AM</span>
           </div>
-          <!-- 👁️ CLEAN TEXT-BASED VISITOR COUNTER BADGE -->
-          <div class="visitor-badge" title="Live Profile Pageviews Counter">
-            <span>👁️ <strong id="visitorCount">...</strong> views</span>
-          </div>
         </div>
         <p class="hero-copy">
           i build things on the internet & mobile. passionate about computer science, embedded ai, and creating practical applications that make a real impact.
@@ -1091,23 +1069,6 @@
       setTimeout(() => toast.classList.remove("show"), 2500);
     }
 
-    async function initVisitorCounter() {
-      const visitorCountEl = document.getElementById("visitorCount");
-      if (!visitorCountEl) return;
-      try {
-        const response = await fetch("https://api.counterapi.dev/v1/nikita000kumari-portfolio/views/up");
-        const data = await response.json();
-        if (data && typeof data.count === 'number') {
-          visitorCountEl.textContent = data.count.toLocaleString();
-        } else {
-          visitorCountEl.textContent = "128";
-        }
-      } catch (err) {
-        visitorCountEl.textContent = "128";
-      }
-    }
-    initVisitorCounter();
-
     // ✉️ WEB3FORMS CONTACT FORM JS HANDLER
     const contactForm = document.getElementById("contactForm");
     const formStatus = document.getElementById("formStatus");
@@ -1300,6 +1261,7 @@
       } catch (e) {}
     }
 
+    // 🐾 soundChibiMeow
     function soundChibiMeow() {
       initAudio();
       if (!audioCtx) return;
