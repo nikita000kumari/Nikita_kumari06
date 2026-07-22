@@ -97,38 +97,51 @@
 
     .page { width: min(780px, 100%); margin: 0 auto; }
 
+    /* 🧼 STREAMLINED & SPARKLY TOP BAR */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
       padding-bottom: 1.15rem;
       margin-bottom: 2.5rem;
       border-bottom: 1px solid var(--line);
     }
 
-    .nav { display: flex; flex-wrap: wrap; gap: 1.2rem; color: var(--muted); }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
     .nav a:hover, .socials a:hover, .list a:hover, .contact-line a:hover {
       color: var(--accent);
       text-decoration: underline;
       text-underline-offset: 0.22rem;
     }
 
-    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
 
+    /* Minimal Search Button (Saves space) */
     .cmd-k-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 0.75rem;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
       border: 1px solid var(--line);
       border-radius: 6px;
-      font-size: 0.78rem;
       color: var(--muted);
       background: var(--toggle-bg);
       cursor: pointer;
       font-family: inherit;
       transition: all 0.2s ease;
+      padding: 0;
     }
 
     .cmd-k-btn:hover {
@@ -137,13 +150,12 @@
       transform: translateY(-1px);
     }
 
-    .cmd-k-btn kbd {
-      background: var(--tag-bg);
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      padding: 1px 4px;
-      font-size: 0.7rem;
-      color: var(--soft);
+    .cmd-k-btn svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
     }
 
     .btn-resume {
@@ -176,8 +188,8 @@
       user-select: none;
       outline: none;
       -webkit-tap-highlight-color: transparent;
-      height: 65px;
-      width: 38px;
+      height: 60px;
+      width: 34px;
     }
 
     .bulb-glass { transition: fill 0.3s ease, filter 0.3s ease; }
@@ -652,7 +664,7 @@
     @media (max-width: 560px) {
       body { padding: 20px 16px 44px; }
       .topbar { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .nav { gap: 0.8rem; }
+      .nav { gap: 1rem; }
       .footer { flex-direction: column; gap: 0.5rem; }
       .pet-container { bottom: 16px; right: 16px; }
       .pet-avatar-wrapper { width: 60px; height: 60px; }
@@ -663,39 +675,36 @@
 </head>
 <body>
   <div class="page">
+    <!-- 🧼 UN-CROWDED STREAMLINED TOP BAR -->
     <header class="topbar">
       <nav class="nav" aria-label="primary">
         <a href="#home">home</a>
-        <a href="#about">about</a>
         <a href="#work">work</a>
         <a href="#projects">projects</a>
-        <a href="#skills">skills</a>
-        <a href="#activity">activity</a>
         <a href="#writing">writing</a>
         <a href="#contact">say hi</a>
       </nav>
 
       <div class="header-actions">
-        <!-- ⌨️ COMMAND PALETTE TRIGGER BUTTON -->
+        <!-- ⌨️ Minimal Search Button -->
         <button class="cmd-k-btn" id="openCmdBtn" type="button" title="Open Command Palette (Ctrl+K)">
-          <span>search</span> <kbd>⌘K</kbd>
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
 
         <a href="https://drive.google.com/" target="_blank" class="btn-resume" rel="noreferrer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           resume
         </a>
 
-        <!-- 💡 PULL-CHAIN LIGHT BULB FIX -->
-        <button class="pull-chain-toggle" id="themeToggle" type="button" title="Pull string to toggle light/dark theme">
-          <svg viewBox="0 0 40 70" width="38" height="65">
+        <!-- 💡 Lightbulb Theme toggle -->
+        <button class="pull-chain-toggle" id="themeToggle" type="button" title="Pull string to toggle theme">
+          <svg viewBox="0 0 40 70" width="34" height="60">
             <line x1="20" y1="0" x2="20" y2="10" stroke="var(--soft)" stroke-width="2"/>
             <rect x="14" y="10" width="12" height="5" rx="1" fill="var(--soft)"/>
             <path class="bulb-glass" d="M 20 15 C 12 15, 9 23, 12 30 C 14 34, 16 37, 16 40 L 24 40 C 24 37, 26 34, 28 30 C 31 23, 28 15, 20 15 Z" stroke-width="1.8"/>
             <path class="bulb-filament" d="M 17 37 L 18 26 L 20 29 L 22 26 L 23 37" fill="none" stroke-width="1.4" stroke-linecap="round"/>
             <g class="pull-string-group" id="pullStringGroup">
-              <line class="string-line" x1="20" y1="40" x2="20" y2="56"/>
-              <circle class="pull-ring" cx="20" cy="61" r="4"/>
+              <line class="string-line" x1="20" y1="40" x2="20" y2="52"/>
+              <circle class="pull-ring" cx="20" cy="56" r="3.5"/>
             </g>
           </svg>
         </button>
